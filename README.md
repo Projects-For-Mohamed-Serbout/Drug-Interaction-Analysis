@@ -1,3 +1,9 @@
+## 🚀 Quick Setup Guide
+
+If you'd like to quickly set up the project, follow this [**Step-by-Step Setup Guide**](#-how-to-set-up-the-project). This link will take you directly to the section of the README that explains how to clone the repository, create a virtual environment, install dependencies, and get started.
+
+---
+
 # 🏥 Drug Interaction Data Engineering and Analysis
 
 ## 📌 Project Overview
@@ -71,4 +77,56 @@ To ensure structured development, this project follows an **incremental and prot
 ### **1️⃣ Clone the Repository**
 ```sh
 git clone https://github.com/YOUR-USERNAME/Drug_Interaction_Analysis.git
+```
+```sh
 cd Drug_Interaction_Analysis
+```
+
+### **2️⃣ Set Up the Virtual Environment**
+Create a virtual environment to keep the dependencies isolated and prevent conflicts with system-wide packages.
+
+***On Windows:***
+
+```sh
+python -m venv env
+```
+```sh
+.\env\Scripts\activate
+```
+
+***On macOS/Linux:***
+
+```sh
+python3 -m venv env
+```
+```sh
+source env/bin/activate
+```
+### **3️⃣ Install Project Dependencies**
+
+Once the virtual environment is activated, install all required libraries using this command:
+```sh
+pip install -r requirements.txt
+```
+
+### **4️⃣ Verify Installation**
+
+To verify that the dependencies are correctly installed, you can check the installed packages:
+```sh
+pip freeze
+```
+
+### **5️⃣ Run the Project**
+
+Now you're ready to start working on the project! You can run the Python scripts or start the development server as needed. For example:
+```sh
+python main.py
+```
+
+### **6️⃣ Deactivate the Virtual Environment**
+
+When you're done working on the project, deactivate the virtual environment by running:
+```sh
+deactivate
+
+```

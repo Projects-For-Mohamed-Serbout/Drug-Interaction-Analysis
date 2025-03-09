@@ -1,0 +1,33 @@
+[MASTER]
+# The maximum number of characters on a single line
+max-line-length = 120
+
+# Disable the warning for missing docstrings (you can change it to 'yes' if you prefer)
+#disable=missing-docstring
+
+[FORMAT]
+# Control the indentation of the code
+#indent-string = '    '  # 4 spaces for indentation
+
+[MESSAGES CONTROL]
+# List of message symbols to disable (you can add more here)
+#disable=
+#    C0114,  # Missing module docstring
+#    C0301,  # Line too long (can increase the limit with max-line-length)
+#    R0913   # Too many arguments in function definition (can adjust this too)
+
+#[REPORTS]
+# Disable the reports and stats output (you can change 'no' to 'yes' if you prefer it)
+#output-format = colorized
+#reports = no
+
+[DESIGN]
+# Configure the number of arguments a function can have
+#max-args=10
+# The maximum number of attributes for a class
+#max-attributes=10
+
+[TYPECHECK]
+# Add additional packages that Pylint should consider
+# For example, if you're using 'numpy' or other external libraries, add them here.
+#additional-builtins=numpy

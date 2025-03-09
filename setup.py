@@ -1,3 +1,5 @@
+"""Setup script for the Python project."""
+
 from setuptools import setup, find_packages
 
 setup(

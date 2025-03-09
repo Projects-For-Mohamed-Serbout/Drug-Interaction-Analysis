@@ -1,6 +1,6 @@
 [MASTER]
 # The maximum number of characters on a single line
-max-line-length = 120
+max-line-length = 130
 
 # Disable the warning for missing docstrings (you can change it to 'yes' if you prefer)
 #disable=missing-docstring

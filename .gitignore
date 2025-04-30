@@ -171,3 +171,6 @@ cython_debug/
 .pypirc
 
 info
+data
+.env
+know_path_tree-project.py

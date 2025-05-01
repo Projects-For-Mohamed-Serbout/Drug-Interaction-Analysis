@@ -56,6 +56,7 @@ DICTIONARY_PARSERS = {
     "DICCIONARIO_VIAS_ADMINISTRACION.xml": lambda f: parse_generic(f, "viasadministracion", ["codigoviaadministracion", "viaadministracion"], "vias"),
 }
 
+
 def parse_prescripcion_xml(file_path):
     """
     Parse Prescripcion.xml file and extract structured prescription data

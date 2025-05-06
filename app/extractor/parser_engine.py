@@ -1,3 +1,5 @@
+# python -m app.extractor.parser_engine
+
 import os
 import xml.etree.ElementTree as ET
 import json

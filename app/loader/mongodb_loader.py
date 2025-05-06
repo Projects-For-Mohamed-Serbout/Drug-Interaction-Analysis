@@ -1,3 +1,5 @@
+# python -m app.loader.mongodb_loader
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv

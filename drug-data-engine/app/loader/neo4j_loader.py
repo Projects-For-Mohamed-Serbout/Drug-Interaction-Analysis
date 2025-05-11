@@ -3,22 +3,20 @@
 import os
 from neo4j import GraphDatabase
 import logging
-from dotenv import load_dotenv
+from app.core.config import settings
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Load environment variables
-load_dotenv()
 
 # Neo4j configuration
-NEO4J_URI = os.getenv("NEO4J_URI")
-NEO4J_USER = os.getenv("NEO4J_USER")
-NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+NEO4J_URI = settings.neo4j_uri
+NEO4J_USER = settings.neo4j_user
+NEO4J_PASSWORD = settings.neo4j_password
 
 # Path to CSV directory
-CSV_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), '../data/csv'))
+CSV_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), '../../../data/csv'))
 
 
 class Neo4jLoader:

@@ -1,4 +1,4 @@
-name: Python CI
+name: CI Pipeline
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  drug-data-engine:
+    name: Drug Data Engine (Python)
     runs-on: ubuntu-latest
 
     strategy:
@@ -36,3 +37,28 @@ jobs:
       - name: Run Flake8
         working-directory: ./drug-data-engine
         run: flake8 .
+
+  drug-data-ui:
+    name: Drug Data UI (React + TypeScript)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        working-directory: ./drug-data-ui
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./drug-data-ui
+        run: npm run lint
+
+      - name: Build Vite App
+        working-directory: ./drug-data-ui
+        run: npm run build

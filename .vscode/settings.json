@@ -1,0 +1,10 @@
+{
+  "python.envFile": "${workspaceFolder}/drug-data-engine/.env",
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}/drug-data-engine"
+  },
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/drug-data-engine"
+  ],
+  "python.defaultInterpreterPath": "${workspaceFolder}/drug-data-engine/env/Scripts/python.exe"
+}

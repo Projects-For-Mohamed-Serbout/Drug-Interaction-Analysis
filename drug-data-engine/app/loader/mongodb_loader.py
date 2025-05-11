@@ -1,17 +1,14 @@
 # python -m app.loader.mongodb_loader
 
-import os
+from app.core.config import settings
 from pathlib import Path
-from dotenv import load_dotenv
 from pymongo import MongoClient
 from app.extractor.parser_engine import extract_all
 
-# Load environment variables
-load_dotenv()
 
 # MongoDB configuration
-MONGO_URI = os.getenv("MONGO_URI")
-MONGO_DB = os.getenv("MONGO_DB")
+MONGO_URI = settings.mongodb_uri
+MONGO_DB = settings.mongodb_db
 
 
 def get_mongo_connection():

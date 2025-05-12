@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "UI de Datos de Medicamentos",
+    "welcome": "Bienvenido a UI de Datos de Medicamentos",
+    "description": "Ver y analizar datos farmacéuticos con facilidad.",
+    "systemTitle": "Sistema de Análisis de Interacciones Farmacológicas"
+  },
+  "sidebar": {
+    "home": "Inicio",
+    "data": "Datos",
+    "users": "Usuarios",
+    "settings": "Configuración",
+    "open": "Abrir Barra Lateral",
+    "close": "Cerrar Barra Lateral"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalMeds": "Total de Medicamentos",
+    "interactions": "Interacciones",
+    "activeIngredients": "Principios Activos"
+  },
+  "medications": {
+    "title": "Medicamentos",
+    "description": "Gestionar y explorar la base de datos de medicamentos.",
+    "table": {
+      "name": "Nombre",
+      "laboratory": "Laboratorio",
+      "activeIngredient": "Principio Activo",
+      "status": "Estado"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo"
+    }
+  },
+  "interactions": {
+    "title": "Interacciones",
+    "description": "Analizar interacciones entre diferentes medicamentos."
+  },
+  "activeIngredients": {
+    "title": "Principios Activos",
+    "description": "Explorar y analizar principios activos farmacéuticos."
+  },
+  "laboratories": {
+    "title": "Laboratorios",
+    "description": "Información sobre laboratorios farmacéuticos."
+  },
+  "databasePerformance": {
+    "title": "Rendimiento de BD",
+    "description": "Monitorizar y analizar métricas de rendimiento de la base de datos."
+  },
+  "nlpAnalysis": {
+    "title": "Análisis NLP",
+    "description": "Análisis de procesamiento de lenguaje natural de datos farmacéuticos."
+  },
+  "settings": {
+    "title": "Configuración",
+    "description": "Configurar ajustes y preferencias de la aplicación."
+  },
+  "DBPerformance": {
+    "title": "Rendimiento BD",
+    "description": "Configurar ajustes y preferencias de la aplicación."
+  }
+}

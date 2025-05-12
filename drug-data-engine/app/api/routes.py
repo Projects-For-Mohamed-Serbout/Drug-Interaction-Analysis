@@ -13,41 +13,35 @@ router = APIRouter()
 # =======================
 # 📦 MongoDB: Medications
 # =======================
-
-@router.get("/medications", tags=["Medications"])
-def read_all_medications():
-    return get_all_items()
-
-
-@router.get("/medications/{med_id}", tags=["Medications"])
-def read_medication(med_id: str):
-    med = get_item_by_id(med_id)
-    if not med:
-        raise HTTPException(status_code=404, detail="Medication not found")
-    return med
+@router.get("/medications/{collection}", tags=["Mongo Collections"])
+def read_all_documents(collection: str):
+    return get_all_items(collection)
 
 
-@router.post("/medications", tags=["Medications"])
-def create_medication(item: dict):
-    return create_item(item)
+@router.get("/medications/{collection}/{item_id}", tags=["Mongo Collections"])
+def read_document(collection: str, item_id: str):
+    doc = get_item_by_id(collection, item_id)
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+    return doc
 
 
-@router.put("/medications/{med_id}", tags=["Medications"])
-def update_medication(med_id: str, update_data: dict):
-    updated = update_item(med_id, update_data)
+@router.post("/medications/{collection}", tags=["Mongo Collections"])
+def create_document(collection: str, item: dict):
+    return create_item(collection, item)
+
+
+@router.put("/medications/{collection}/{item_id}", tags=["Mongo Collections"])
+def update_document(collection: str, item_id: str, update_data: dict):
+    updated = update_item(collection, item_id, update_data)
     if not updated:
-        raise HTTPException(status_code=404, detail="Medication not found or not updated")
-    return {"message": "Medication updated successfully"}
+        raise HTTPException(status_code=404, detail="Document not found or not updated")
+    return {"message": "Document updated successfully"}
 
 
-@router.delete("/medications/{med_id}", tags=["Medications"])
-def delete_medication(med_id: str):
-    success = delete_item(med_id)
-    if not success:
-        raise HTTPException(status_code=404, detail="Medication not found")
-    return {"message": "Medication deleted successfully"}
-
-
-# =======================
-# 📦 Neo4j: Interactions
-# =======================
+@router.delete("/medications/{collection}/{item_id}", tags=["Mongo Collections"])
+def delete_document(collection: str, item_id: str):
+    deleted = delete_item(collection, item_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Document not found")
+    return {"message": "Document deleted successfully"}

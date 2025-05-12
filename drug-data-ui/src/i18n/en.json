@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "Drug Data UI",
+    "welcome": "Welcome to Drug Data UI",
+    "description": "View and analyze pharmaceutical data with ease.",
+    "systemTitle": "Pharmaceutical Interaction Analysis System"
+  },
+  "sidebar": {
+    "home": "Home",
+    "data": "Data",
+    "users": "Users",
+    "settings": "Settings",
+    "open": "Open Sidebar",
+    "close": "Close Sidebar"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalMeds": "Total Medications",
+    "interactions": "Interactions",
+    "activeIngredients": "Active Ingredients"
+  },
+  "medications": {
+    "title": "Medications",
+    "description": "Manage and explore the medication database.",
+    "table": {
+      "name": "Name",
+      "laboratory": "Laboratory",
+      "activeIngredient": "Active Ingredient",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "interactions": {
+    "title": "Interactions",
+    "description": "Analyze interactions between different medications."
+  },
+  "activeIngredients": {
+    "title": "Active Ingredients",
+    "description": "Browse and analyze active pharmaceutical ingredients."
+  },
+  "laboratories": {
+    "title": "Laboratories",
+    "description": "Information about pharmaceutical laboratories."
+  },
+  "databasePerformance": {
+    "title": "Database Performance",
+    "description": "Monitor and analyze database performance metrics."
+  },
+  "nlpAnalysis": {
+    "title": "NLP Analysis",
+    "description": "Natural Language Processing analysis of pharmaceutical data."
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Configure application settings and preferences."
+  },
+    "DBPerformance": {
+    "title": "DBPerformance BD",
+    "description": "DDD ."
+  }
+}

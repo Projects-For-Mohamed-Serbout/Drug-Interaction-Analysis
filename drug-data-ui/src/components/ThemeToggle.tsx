@@ -1,45 +1,62 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Moon, Sun, Monitor } from 'lucide-react';
 
 type ThemeOption = 'light' | 'dark' | 'system';
 
-const ThemeToggle = () => {
-  const [theme, setTheme] = useState<ThemeOption>(() => {
-    return (localStorage.getItem('theme') as ThemeOption) || 'system';
-  });
+const themeOptions: { value: ThemeOption; icon: React.ElementType; label: string }[] = [
+  { value: 'system', icon: Monitor, label: 'System' },
+  { value: 'light', icon: Sun, label: 'Light' },
+  { value: 'dark', icon: Moon, label: 'Dark' },
+];
+
+const applyTheme = (mode: ThemeOption) => {
+  const root = document.documentElement;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const isDark = mode === 'dark' || (mode === 'system' && prefersDark);
+  root.classList.toggle('dark', isDark);
+  root.classList.toggle('light', !isDark);
+};
+
+const ThemeToggle: React.FC = () => {
+  const [theme, setTheme] = useState<ThemeOption>(
+    () => (localStorage.getItem('theme') as ThemeOption) || 'system'
+  );
+
+  const handleSystemChange = useCallback(() => {
+    if (theme === 'system') applyTheme('system');
+  }, [theme]);
 
   useEffect(() => {
-    const root = window.document.documentElement;
-
-    const applyTheme = (mode: ThemeOption) => {
-      if (mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        root.classList.add('dark');
-      } else {
-        root.classList.remove('dark');
-      }
-    };
-
     applyTheme(theme);
     localStorage.setItem('theme', theme);
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      if (theme === 'system') applyTheme('system');
-    };
+    mediaQuery.addEventListener?.('change', handleSystemChange);
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme]);
+    return () => {
+      mediaQuery.removeEventListener?.('change', handleSystemChange);
+    };
+  }, [theme, handleSystemChange]);
 
   return (
-    <select
-      value={theme}
-      onChange={(e) => setTheme(e.target.value as ThemeOption)}
-      className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 text-sm text-black dark:text-white"
-    >
-      <option value="system">🌐 System</option>
-      <option value="light">☀️ Light</option>
-      <option value="dark">🌙 Dark</option>
-    </select>
+    <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1 space-x-1">
+      {themeOptions.map(({ value, icon: Icon, label }) => {
+        const isActive = theme === value;
+        return (
+          <button
+            key={value}
+            onClick={() => setTheme(value)}
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all 
+              ${isActive ? 'bg-white dark:bg-gray-600 shadow-md' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}
+              text-gray-600 dark:text-gray-300`}
+            aria-label={`Switch to ${label} mode`}
+          >
+            <Icon className={`w-5 h-5 ${isActive ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'}`} />
+          </button>
+        );
+      })}
+    </div>
   );
 };
 

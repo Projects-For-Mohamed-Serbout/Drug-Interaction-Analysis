@@ -1,31 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiChevronDown, FiCheck } from 'react-icons/fi';
+import clsx from 'clsx';
+import 'flag-icons/css/flag-icons.min.css';
+
+const languages = [
+  { code: 'en', name: 'English', flag: 'us' },
+  { code: 'es', name: 'Español', flag: 'es' },
+];
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+  const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
+
+  const changeLanguage = (code: string) => {
+    if (code !== i18n.language) i18n.changeLanguage(code);
+    setIsOpen(false);
   };
 
   return (
-    <div className="flex space-x-2">
+    <div className="relative">
       <button
-        onClick={() => changeLanguage('en')}
-        className={`px-3 py-1 rounded ${
-          i18n.language === 'en' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
-        }`}
+        onClick={() => setIsOpen(prev => !prev)}
+        className={clsx(
+          'flex items-center justify-between w-40 px-4 py-2 rounded-lg border shadow-sm transition',
+          'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-md',
+          'focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark'
+        )}
       >
-        EN
+        <div className="flex items-center gap-2">
+          <span className={`fi fi-${currentLang.flag} w-5 h-3 rounded-sm`} />
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+            {currentLang.name}
+          </span>
+        </div>
+        <FiChevronDown
+          className={clsx(
+            'w-4 h-4 transition-transform',
+            isOpen && 'rotate-180',
+            'text-gray-500 dark:text-gray-400'
+          )}
+        />
       </button>
-      <button
-        onClick={() => changeLanguage('es')}
-        className={`px-3 py-1 rounded ${
-          i18n.language === 'es' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
-        }`}
-      >
-        ES
-      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute z-10 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden"
+          >
+            {languages.map(({ code, name, flag }) => {
+              const isActive = code === i18n.language;
+              return (
+                <button
+                  key={code}
+                  onClick={() => changeLanguage(code)}
+                  disabled={isActive}
+                  className={clsx(
+                    'w-full flex items-center gap-2 px-4 py-2 text-sm transition-colors',
+                    isActive
+                      ? 'bg-primary-light/20 dark:bg-primary-dark/30 text-primary-light dark:text-primary-dark cursor-default'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200',
+                    'focus:outline-none'
+                  )}
+                >
+                  <span className={`fi fi-${flag} w-5 h-3 rounded-sm`} />
+                  <span>{name}</span>
+                  {isActive && <FiCheck className="ml-auto text-primary-light dark:text-primary-dark" />}
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -4,9 +4,7 @@ const Interactions = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">{t('interacciones.title')}</h1>
-    </div>
+      <h1 className="text-2xl font-bold">{t('interacciones.title')}</h1>
   );
 };
 

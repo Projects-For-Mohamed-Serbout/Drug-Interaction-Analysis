@@ -4,8 +4,11 @@ from app.services.mongo_service import (
     get_all_items,
     get_item_by_id,
     update_item,
-    delete_item
+    delete_item,
+    get_collection_count,
 )
+from app.services.neo4j_service import get_duplicidad_count
+
 
 router = APIRouter()
 
@@ -45,3 +48,12 @@ def delete_document(collection: str, item_id: str):
     if not deleted:
         raise HTTPException(status_code=404, detail="Document not found")
     return {"message": "Document deleted successfully"}
+
+
+@router.get("/dashboard/stats", tags=["Dashboard"])
+def get_dashboard_stats():
+    return {
+        "medications": get_collection_count("prescriptions"),
+        "ingredients": get_collection_count("diccionario_principios_activos"),
+        "interactions": get_duplicidad_count(),
+    }

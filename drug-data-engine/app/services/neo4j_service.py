@@ -1,9 +1,14 @@
-from app.core.database import neo4j_driver
+from neo4j import GraphDatabase
+from app.core.config import settings
+
+driver = GraphDatabase.driver(
+    settings.neo4j_uri, auth=(settings.neo4j_user, settings.neo4j_password)
+)
 
 
-def get_neo4j_sample():
-    query = "MATCH (n) RETURN n LIMIT 5"
-
-    with neo4j_driver.session() as session:
+def get_duplicidad_count() -> int:
+    query = "MATCH (d:Duplicidad) RETURN count(d) AS count"
+    with driver.session() as session:
         result = session.run(query)
-        return [record["n"] for record in result]
+        record = result.single()
+        return record["count"] if record else 0

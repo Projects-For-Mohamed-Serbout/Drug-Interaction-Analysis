@@ -18,7 +18,10 @@
     "totalMedications": "Total Medications",
     "interactions": "Interactions",
     "activeIngredients": "Active Ingredients",
-    "detectedInteractions": "Detected Interactions"
+    "detectedInteractions": "Detected Interactions",
+    "error": {
+      "fetchStats": "Failed to load dashboard statistics"
+    }
   },
   "medications": {
     "title": "Medications",

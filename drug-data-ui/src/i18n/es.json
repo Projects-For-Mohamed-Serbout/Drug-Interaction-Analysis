@@ -18,7 +18,10 @@
     "totalMedications": "Total Medicamentos",
     "interactions": "Interacciones",
     "activeIngredients": "Principios Activos",
-    "detectedInteractions": "Interacciones Detectadas"
+    "detectedInteractions": "Interacciones Detectadas",
+    "error": {
+      "fetchStats": "Error al cargar las estadísticas del panel"
+    }
   },
   "medications": {
     "title": "Medicamentos",

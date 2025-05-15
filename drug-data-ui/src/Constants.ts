@@ -65,3 +65,18 @@ export const MENU_ITEMS: MenuItem[] = [
   },
 ];
 
+export const DASHBOARD_STATS_KEYS = [
+  {
+    key: "medications",
+    i18nKey: "dashboard.totalMedications",
+  },
+  {
+    key: "ingredients",
+    i18nKey: "dashboard.activeIngredients",
+  },
+  {
+    key: "interactions",
+    i18nKey: "dashboard.detectedInteractions",
+  },
+] as const;
+

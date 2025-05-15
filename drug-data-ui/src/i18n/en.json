@@ -15,9 +15,13 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "totalMeds": "Total Medications",
+    "totalMedications": "Total Medications",
     "interactions": "Interactions",
-    "activeIngredients": "Active Ingredients"
+    "activeIngredients": "Active Ingredients",
+    "detectedInteractions": "Detected Interactions",
+    "error": {
+      "fetchStats": "Failed to load dashboard statistics"
+    }
   },
   "medications": {
     "title": "Medications",

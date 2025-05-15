@@ -31,7 +31,7 @@ node_modules
 test_config
 /build
 /coverage
-
+dataset details.txt
 # misc
 .DS_Store
 .env.local

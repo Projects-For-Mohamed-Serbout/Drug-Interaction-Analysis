@@ -40,3 +40,8 @@ def delete_item(collection_name: str, item_id: str):
     db = get_mongo_client()
     result = db[collection_name].delete_one({"_id": ObjectId(item_id)})
     return result.deleted_count > 0
+
+
+def get_collection_count(collection_name: str) -> int:
+    db = get_mongo_client()
+    return db[collection_name].count_documents({})

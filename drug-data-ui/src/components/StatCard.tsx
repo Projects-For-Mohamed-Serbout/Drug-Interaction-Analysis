@@ -8,13 +8,13 @@ interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ value, label, icon }) => {
   return (
-    <div className="bg-surface-light dark:bg-surface-dark rounded-2xl shadow p-6 w-full max-w-sm flex items-center">
-      {icon && <div className="mr-4">{icon}</div>}
+    <div className="bg-surface-light dark:bg-gray-800 rounded-lg shadow-sm p-6 w-full flex items-center">
+      {icon && <div className="mr-4 text-blue-600 dark:text-blue-400">{icon}</div>}
       <div>
-        <div className="text-3xl font-bold text-text-light dark:text-text-dark">
+        <div className="text-3xl font-bold text-gray-800 dark:text-white">
           {value.toLocaleString()}
         </div>
-        <div className="mt-2 text-sm text-muted-light dark:text-muted-dark">
+        <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           {label}
         </div>
       </div>

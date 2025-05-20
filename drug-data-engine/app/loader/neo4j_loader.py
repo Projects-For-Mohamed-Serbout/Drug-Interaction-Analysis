@@ -260,6 +260,7 @@ class Neo4jLoader:
             cod_dcp: row.cod_dcp,
             cod_dcpf: row.cod_dcpf,
             cod_dcsa: row.cod_dcsa,
+            cod_viaadmin: row.cod_viaadmin,
             cod_envase: row.cod_envase,
             contenido: row.contenido,
             unid_contenido: row.unid_contenido,
@@ -445,6 +446,15 @@ class Neo4jLoader:
         self.run_query(query)
 
         logger.info("All relationships created successfully")
+
+        # 14. Connect Prescription to Administration Route
+        logger.info("Creating relationships: Prescription to Administration Route")
+        query = """
+        MATCH (p:Prescripcion), (v:ViaAdministracion)
+        WHERE p.cod_viaadmin = v.codigoviaadministracion
+        CREATE (p)-[:HAS_ADMIN_ROUTE]->(v)
+        """
+        self.run_query(query)
 
 
 def main():

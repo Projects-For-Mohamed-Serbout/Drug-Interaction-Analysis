@@ -64,5 +64,23 @@
     "DBPerformance": {
     "title": "DBPerformance BD",
     "description": "DDD ."
+  },
+  "search": {
+    "medicationsSearch": "Medication Search",
+    "searchPlaceholder": "Search by name, active ingredient or national code...",
+    "searchButton": "Search",
+    "resultsTitle": "Search Results",
+    "noResults": "No results found",
+    "activeIngredient": "Active Ingredient",
+    "nationalCode": "National Code",
+    "laboratory": "Laboratory",
+    "administrationRoute": "Route",
+    "error": {
+      "shortSearchTerm": "Search term must be at least {{minLength}} characters",
+      "searchFailed": "Failed to search medications"
+    },
+    "noResultsFound": "No results found",
+    "resultsFound": "{{count}} results found",
+    "searchPerformed": "Search performed"
   }
 }

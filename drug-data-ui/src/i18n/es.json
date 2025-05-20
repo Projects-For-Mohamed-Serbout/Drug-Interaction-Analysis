@@ -64,5 +64,23 @@
   "DBPerformance": {
     "title": "Rendimiento BD",
     "description": "Configurar ajustes y preferencias de la aplicación."
+  },
+    "search": {
+    "medicationsSearch": "Búsqueda de Medicamentos",
+    "searchPlaceholder": "Buscar por nombre, principio activo o código nacional...",
+    "searchButton": "Buscar",
+    "resultsTitle": "Resultados de la búsqueda",
+    "noResults": "No se encontraron resultados",
+    "activeIngredient": "Principio Activo",
+    "nationalCode": "Código Nacional",
+    "laboratory": "Laboratorio",
+    "administrationRoute": "Vía",
+    "error": {
+      "shortSearchTerm": "El término de búsqueda debe tener al menos {{minLength}} caracteres",
+      "searchFailed": "Error al buscar medicamentos"
+    },
+    "noResultsFound": "No se encontraron resultados",
+    "resultsFound": "{{count}} resultados encontrados",
+    "searchPerformed": "Búsqueda realizada"
   }
 }

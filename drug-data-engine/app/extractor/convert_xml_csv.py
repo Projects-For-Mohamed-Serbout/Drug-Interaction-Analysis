@@ -349,10 +349,17 @@ class XMLToCSVConverter:
                 main_writer.writerow([
                     'cod_nacion', 'nro_definitivo', 'des_nomco', 'cod_dcp', 'cod_dcpf',
                     'cod_dcsa', 'cod_envase', 'contenido', 'unid_contenido', 'laboratorio_titular',
-                    'fecha_autorizacion', 'cod_sitreg', 'sw_generico', 'url_fictec'
+                    'fecha_autorizacion', 'cod_sitreg', 'sw_generico', 'url_fictec',
+                    'cod_viaadmin'
                 ])
 
                 for pres in root.findall('ns:prescription', ns):
+                    formas = pres.find('ns:formasfarmaceuticas', ns)
+                    cod_viaadmin = ''
+                    if formas is not None:
+                        via = formas.find('ns:viasadministracion/ns:cod_via_admin', ns)
+                        cod_viaadmin = via.text.strip() if via is not None and via.text else ''
+
                     main_writer.writerow([
                         pres.findtext('ns:cod_nacion', '', ns),
                         pres.findtext('ns:nro_definitivo', '', ns),
@@ -368,6 +375,7 @@ class XMLToCSVConverter:
                         pres.findtext('ns:cod_sitreg', '', ns),
                         pres.findtext('ns:sw_generico', '', ns),
                         pres.findtext('ns:url_fictec', '', ns),
+                        cod_viaadmin
                     ])
 
             results['PRESCRIPCION'] = f"CSV file created successfully: {main_output_file}"
@@ -477,7 +485,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Convert XML files to CSV format')
     parser.add_argument('--input-dir', '-i', default='data', help='Input directory containing XML files')
-    parser.add_argument('--output-dir', '-o', default='data/csv', help='Output directory for CSV files')
+    parser.add_argument('--output-dir', '-o', default='data/csv/csv2', help='Output directory for CSV files')
 
     args = parser.parse_args()
 

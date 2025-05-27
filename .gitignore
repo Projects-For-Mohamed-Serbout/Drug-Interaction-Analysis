@@ -146,7 +146,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+#.env
 .venv
 env/
 venv/
@@ -190,5 +190,5 @@ cython_debug/
 
 info
 data
-.env
+#.env
 know_path_tree-project.py

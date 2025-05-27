@@ -1,6 +1,6 @@
 ## 🚀 Quick Setup Guide
 
-If you'd like to quickly set up the project, follow this [**Step-by-Step Setup Guide**](#-how-to-set-up-the-project). This link will take you directly to the section of the README that explains how to clone the repository, create a virtual environment, install dependencies, and get started.
+If you'd like to quickly set up the project, follow this [**Step-by-Step Setup Guide**](#-how-to-set-up-the-project). This link will take you directly to the section that explains how to get started.
 
 ---
 
@@ -73,6 +73,11 @@ To ensure structured development, this project follows an **incremental and prot
 ---
 
 ## 🚀 How to Set Up the Project
+The project consists of two parts:
+- **Backend**: Built with FastAPI  
+- **Frontend**: Built with React + Vite
+
+Follow the steps below to set up and run each part
 
 ### **1️⃣ Clone the Repository**
 ```sh
@@ -82,9 +87,14 @@ git clone https://github.com/YOUR-USERNAME/Drug_Interaction_Analysis.git
 cd Drug_Interaction_Analysis
 ```
 
-### **2️⃣ Set Up the Virtual Environment**
-Create a virtual environment to keep the dependencies isolated and prevent conflicts with system-wide packages.
+### **2️⃣Backend Setup (drug-data-engine)**
+#### ***Navigate to Backend Directory***
 
+```sh
+cd drug-data-engine
+```
+
+#### ***Set Up the Virtual Environment***
 ***On Windows:***
 
 ```sh
@@ -102,31 +112,36 @@ python3 -m venv env
 ```sh
 source env/bin/activate
 ```
-### **3️⃣ Install Project Dependencies**
+#### ***Install Project Dependencies***
 
 Once the virtual environment is activated, install all required libraries using this command:
 ```sh
 pip install -r requirements.txt
 ```
 
-### **4️⃣ Verify Installation**
+#### ***Run the FastAPI Server***
+Make sure you are in drug-data-engine/
 
-To verify that the dependencies are correctly installed, you can check the installed packages:
+Then
+
 ```sh
-pip freeze
+uvicorn app.main:app --reload
+```
+By default, the FastAPI server runs at: http://localhost:8000/docs
+
+### **3️⃣Backend Setup (drug-data-ui)**
+#### ***Navigate to Frontend Directory***
+```sh
+cd drug-data-ui
 ```
 
-### **5️⃣ Run the Project**
-
-Now you're ready to start working on the project! You can run the Python scripts or start the development server as needed. For example:
+#### ***Install Node.js Dependencies***
 ```sh
-python main.py
+npm install
 ```
 
-### **6️⃣ Deactivate the Virtual Environment**
-
-When you're done working on the project, deactivate the virtual environment by running:
+#### ***Run the Development Server***
 ```sh
-deactivate
-
+npm run dev
 ```
+By default, the Vite dev server runs at: http://localhost:5173

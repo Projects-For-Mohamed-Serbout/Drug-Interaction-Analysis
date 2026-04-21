@@ -57,14 +57,6 @@
     "title": "NLP Analysis",
     "description": "Natural Language Processing analysis of pharmaceutical data."
   },
-  "settings": {
-    "title": "Settings",
-    "description": "Configure application settings and preferences."
-  },
-    "DBPerformance": {
-    "title": "DBPerformance BD",
-    "description": "DDD ."
-  },
   "search": {
     "medicationsSearch": "Medication Search",
     "searchPlaceholder": "Search by name, active ingredient or national code...",

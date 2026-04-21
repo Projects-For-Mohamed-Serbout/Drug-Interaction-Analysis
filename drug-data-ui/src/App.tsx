@@ -9,7 +9,6 @@ import ActiveIngredients from "./pages/ActiveIngredients";
 import Laboratories from "./pages/Laboratories";
 import DBPerformance from "./pages/DBPerformance";
 import NLPAnalysis from "./pages/NLPAnalysis";
-import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
           <Route path="/laboratories" element={<Laboratories />} />
           <Route path="/database-performance" element={<DBPerformance />} />
           <Route path="/nlp-analysis" element={<NLPAnalysis />} />
-          <Route path="/settings" element={<Settings />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { AiOutlineHome, AiOutlineSetting, } from "react-icons/ai";
-import { GiPill, GiChemicalDrop,GiBrain, GiFactory,} from "react-icons/gi";
+import { AiOutlineHome } from "react-icons/ai";
+import { GiPill, GiChemicalDrop, GiBrain, GiFactory } from "react-icons/gi";
 import { RiFlowChart } from "react-icons/ri";
 import { MdBarChart } from "react-icons/md";
 import { MENU_ITEMS, MenuKey } from "../Constants";
@@ -14,7 +14,6 @@ const iconMap = {
   [MenuKey.Laboratories]: GiFactory,
   [MenuKey.DatabasePerformance]: MdBarChart,
   [MenuKey.NlpAnalysis]: GiBrain,
-  [MenuKey.Settings]: AiOutlineSetting,
 };
 
 const Sidebar = () => {

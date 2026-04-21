@@ -1,0 +1,1386 @@
+{
+  "metadata": {
+    "timestamp": "2026-04-18T20:39:30.498645",
+    "ground_truth_samples": 44,
+    "spacy_model": "es_core_news_md"
+  },
+  "results": {
+    "severity": {
+      "regex": {
+        "label": "SEVERITY — Regex",
+        "per_class": {
+          "contraindicated": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 10,
+            "tp": 10,
+            "fp": 0,
+            "fn": 0
+          },
+          "mild": {
+            "precision": 1.0,
+            "recall": 0.667,
+            "f1": 0.8,
+            "support": 3,
+            "tp": 2,
+            "fp": 0,
+            "fn": 1
+          },
+          "moderate": {
+            "precision": 0.905,
+            "recall": 0.76,
+            "f1": 0.826,
+            "support": 25,
+            "tp": 19,
+            "fp": 2,
+            "fn": 6
+          },
+          "severe": {
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5,
+            "support": 4,
+            "tp": 2,
+            "fp": 2,
+            "fn": 2
+          },
+          "unknown": {
+            "precision": 0.286,
+            "recall": 1.0,
+            "f1": 0.444,
+            "support": 2,
+            "tp": 2,
+            "fp": 5,
+            "fn": 0
+          }
+        },
+        "macro": {
+          "precision": 0.738,
+          "recall": 0.785,
+          "f1": 0.714
+        },
+        "weighted": {
+          "precision": 0.868,
+          "recall": 0.795,
+          "f1": 0.817
+        },
+        "accuracy": 0.795,
+        "total_samples": 44
+      },
+      "spacy": {
+        "label": "SEVERITY — spaCy",
+        "per_class": {
+          "contraindicated": {
+            "precision": 0.833,
+            "recall": 1.0,
+            "f1": 0.909,
+            "support": 10,
+            "tp": 10,
+            "fp": 2,
+            "fn": 0
+          },
+          "mild": {
+            "precision": 1.0,
+            "recall": 0.667,
+            "f1": 0.8,
+            "support": 3,
+            "tp": 2,
+            "fp": 0,
+            "fn": 1
+          },
+          "moderate": {
+            "precision": 0.826,
+            "recall": 0.76,
+            "f1": 0.792,
+            "support": 25,
+            "tp": 19,
+            "fp": 4,
+            "fn": 6
+          },
+          "severe": {
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5,
+            "support": 4,
+            "tp": 2,
+            "fp": 2,
+            "fn": 2
+          },
+          "unknown": {
+            "precision": 0.333,
+            "recall": 0.5,
+            "f1": 0.4,
+            "support": 2,
+            "tp": 1,
+            "fp": 2,
+            "fn": 1
+          }
+        },
+        "macro": {
+          "precision": 0.698,
+          "recall": 0.685,
+          "f1": 0.68
+        },
+        "weighted": {
+          "precision": 0.787,
+          "recall": 0.773,
+          "f1": 0.775
+        },
+        "accuracy": 0.773,
+        "total_samples": 44
+      }
+    },
+    "type": {
+      "regex": {
+        "label": "TYPE — Regex",
+        "per_class": {
+          "cardiac": {
+            "precision": 1.0,
+            "recall": 0.857,
+            "f1": 0.923,
+            "support": 7,
+            "tp": 6,
+            "fp": 0,
+            "fn": 1
+          },
+          "cns": {
+            "precision": 1.0,
+            "recall": 0.8,
+            "f1": 0.889,
+            "support": 5,
+            "tp": 4,
+            "fp": 0,
+            "fn": 1
+          },
+          "efficacy_increase": {
+            "precision": 0,
+            "recall": 0.0,
+            "f1": 0,
+            "support": 1,
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "efficacy_reduction": {
+            "precision": 1.0,
+            "recall": 0.6,
+            "f1": 0.75,
+            "support": 5,
+            "tp": 3,
+            "fp": 0,
+            "fn": 2
+          },
+          "gastrointestinal": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "hemorrhagic": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.667,
+            "support": 2,
+            "tp": 2,
+            "fp": 2,
+            "fn": 0
+          },
+          "hepatic": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "metabolic": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 4,
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          },
+          "muscular": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "other": {
+            "precision": 0.333,
+            "recall": 1.0,
+            "f1": 0.5,
+            "support": 3,
+            "tp": 3,
+            "fp": 6,
+            "fn": 0
+          },
+          "renal": {
+            "precision": 0.75,
+            "recall": 1.0,
+            "f1": 0.857,
+            "support": 3,
+            "tp": 3,
+            "fp": 1,
+            "fn": 0
+          },
+          "respiratory": {
+            "precision": 0.0,
+            "recall": 0,
+            "f1": 0,
+            "support": 0,
+            "tp": 0,
+            "fp": 1,
+            "fn": 0
+          },
+          "toxicity": {
+            "precision": 1.0,
+            "recall": 0.444,
+            "f1": 0.615,
+            "support": 9,
+            "tp": 4,
+            "fp": 0,
+            "fn": 5
+          }
+        },
+        "macro": {
+          "precision": 0.799,
+          "recall": 0.808,
+          "f1": 0.767
+        },
+        "weighted": {
+          "precision": 0.892,
+          "recall": 0.773,
+          "f1": 0.786
+        },
+        "accuracy": 0.773,
+        "total_samples": 44
+      },
+      "spacy": {
+        "label": "TYPE — spaCy",
+        "per_class": {
+          "cardiac": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 7,
+            "tp": 7,
+            "fp": 0,
+            "fn": 0
+          },
+          "cns": {
+            "precision": 1.0,
+            "recall": 0.8,
+            "f1": 0.889,
+            "support": 5,
+            "tp": 4,
+            "fp": 0,
+            "fn": 1
+          },
+          "efficacy_increase": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0,
+            "support": 1,
+            "tp": 0,
+            "fp": 5,
+            "fn": 1
+          },
+          "efficacy_reduction": {
+            "precision": 1.0,
+            "recall": 0.8,
+            "f1": 0.889,
+            "support": 5,
+            "tp": 4,
+            "fp": 0,
+            "fn": 1
+          },
+          "gastrointestinal": {
+            "precision": 0,
+            "recall": 0.0,
+            "f1": 0,
+            "support": 1,
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hemorrhagic": {
+            "precision": 0.4,
+            "recall": 1.0,
+            "f1": 0.571,
+            "support": 2,
+            "tp": 2,
+            "fp": 3,
+            "fn": 0
+          },
+          "hepatic": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "metabolic": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 4,
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          },
+          "muscular": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 2,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "other": {
+            "precision": 1.0,
+            "recall": 0.667,
+            "f1": 0.8,
+            "support": 3,
+            "tp": 2,
+            "fp": 0,
+            "fn": 1
+          },
+          "renal": {
+            "precision": 0.75,
+            "recall": 1.0,
+            "f1": 0.857,
+            "support": 3,
+            "tp": 3,
+            "fp": 1,
+            "fn": 0
+          },
+          "respiratory": {
+            "precision": 0.0,
+            "recall": 0,
+            "f1": 0,
+            "support": 0,
+            "tp": 0,
+            "fp": 1,
+            "fn": 0
+          },
+          "toxicity": {
+            "precision": 1.0,
+            "recall": 0.444,
+            "f1": 0.615,
+            "support": 9,
+            "tp": 4,
+            "fp": 0,
+            "fn": 5
+          }
+        },
+        "macro": {
+          "precision": 0.763,
+          "recall": 0.726,
+          "f1": 0.718
+        },
+        "weighted": {
+          "precision": 0.91,
+          "recall": 0.773,
+          "f1": 0.808
+        },
+        "accuracy": 0.773,
+        "total_samples": 44
+      }
+    },
+    "mechanism": {
+      "regex": {
+        "label": "MECHANISM — Regex",
+        "per_class": {
+          "pharmacodynamic": {
+            "precision": 1.0,
+            "recall": 0.158,
+            "f1": 0.273,
+            "support": 19,
+            "tp": 3,
+            "fp": 0,
+            "fn": 16
+          },
+          "pharmacokinetic": {
+            "precision": 1.0,
+            "recall": 0.222,
+            "f1": 0.364,
+            "support": 9,
+            "tp": 2,
+            "fp": 0,
+            "fn": 7
+          },
+          "unknown": {
+            "precision": 0.41,
+            "recall": 1.0,
+            "f1": 0.582,
+            "support": 16,
+            "tp": 16,
+            "fp": 23,
+            "fn": 0
+          }
+        },
+        "macro": {
+          "precision": 0.803,
+          "recall": 0.46,
+          "f1": 0.406
+        },
+        "weighted": {
+          "precision": 0.785,
+          "recall": 0.477,
+          "f1": 0.404
+        },
+        "accuracy": 0.477,
+        "total_samples": 44
+      },
+      "spacy": {
+        "label": "MECHANISM — spaCy",
+        "per_class": {
+          "mixed": {
+            "precision": 0.0,
+            "recall": 0,
+            "f1": 0,
+            "support": 0,
+            "tp": 0,
+            "fp": 1,
+            "fn": 0
+          },
+          "pharmacodynamic": {
+            "precision": 1.0,
+            "recall": 0.316,
+            "f1": 0.48,
+            "support": 19,
+            "tp": 6,
+            "fp": 0,
+            "fn": 13
+          },
+          "pharmacokinetic": {
+            "precision": 0.333,
+            "recall": 0.333,
+            "f1": 0.333,
+            "support": 9,
+            "tp": 3,
+            "fp": 6,
+            "fn": 6
+          },
+          "unknown": {
+            "precision": 0.5,
+            "recall": 0.875,
+            "f1": 0.636,
+            "support": 16,
+            "tp": 14,
+            "fp": 14,
+            "fn": 2
+          }
+        },
+        "macro": {
+          "precision": 0.611,
+          "recall": 0.508,
+          "f1": 0.483
+        },
+        "weighted": {
+          "precision": 0.682,
+          "recall": 0.523,
+          "f1": 0.507
+        },
+        "accuracy": 0.523,
+        "total_samples": 44
+      }
+    }
+  },
+  "details": [
+    {
+      "effect": "Aumento del riesgo de arritmias ventriculares.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.815
+      }
+    },
+    {
+      "effect": "Riesgo de torsade de pointes.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.876
+      }
+    },
+    {
+      "effect": "Posible prolongación del intervalo QT.",
+      "true": {
+        "severity": "moderate",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.807
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.895
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de arritmias ventriculares.",
+      "true": {
+        "severity": "moderate",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "severe",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.813
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.752
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de síndrome serotoninérgico.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "cns",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "cns",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "cns",
+        "mechanism": "unknown",
+        "confidence": 0.674
+      }
+    },
+    {
+      "effect": "Síndrome serotoninérgico potencialmente mortal.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "cns",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "cns",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "cns",
+        "mechanism": "unknown",
+        "confidence": 0.695
+      }
+    },
+    {
+      "effect": "Potenciación del efecto sedante sobre el SNC.",
+      "true": {
+        "severity": "moderate",
+        "type": "cns",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "cns",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.728
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "cns",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.817
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de sedación.",
+      "true": {
+        "severity": "moderate",
+        "type": "cns",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "cns",
+        "mechanism": "unknown",
+        "confidence": 0.5
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "cns",
+        "mechanism": "unknown",
+        "confidence": 0.641
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de toxicidad de colchicina.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown",
+        "confidence": 0.655
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de toxicidad por metotrexato.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown",
+        "confidence": 0.655
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hiperpotasemia.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "metabolic",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.655
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hiperpotasemia.",
+      "true": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.65
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.734
+      }
+    },
+    {
+      "effect": "Riesgo de hiperpotasemia severa.",
+      "true": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.563
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "metabolic",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.698
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hemorragia digestiva.",
+      "true": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.641
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.7
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+      "true": {
+        "severity": "moderate",
+        "type": "gastrointestinal",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "gastrointestinal",
+        "mechanism": "unknown",
+        "confidence": 0.591
+      },
+      "spacy": {
+        "severity": "severe",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.556
+      }
+    },
+    {
+      "effect": "Disminución del efecto anticoagulante por inducción del metabolismo hepático med",
+      "true": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.847
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.899
+      }
+    },
+    {
+      "effect": "Disminución del efecto anticonceptivo.",
+      "true": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown",
+        "confidence": 0.588
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown",
+        "confidence": 0.7
+      }
+    },
+    {
+      "effect": "Disminución del efecto uricosúrico.",
+      "true": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown",
+        "confidence": 0.588
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown",
+        "confidence": 0.7
+      }
+    },
+    {
+      "effect": "Reducción del efecto de los dos antiinfecciosos.",
+      "true": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown",
+        "confidence": 0.5
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "efficacy_reduction",
+        "mechanism": "unknown",
+        "confidence": 0.7
+      }
+    },
+    {
+      "effect": "Aumento del efecto anticoagulante y del riesgo hemorrágico.",
+      "true": {
+        "severity": "moderate",
+        "type": "efficacy_increase",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.63
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.708
+      }
+    },
+    {
+      "effect": "Aumento de la nefrotoxicidad.",
+      "true": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "unknown",
+        "confidence": 0.65
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.838
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de nefrotoxicidad.",
+      "true": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "unknown",
+        "confidence": 0.675
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.838
+      }
+    },
+    {
+      "effect": "Aumento de las concentraciones del inmunosupresor.",
+      "true": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "unknown",
+        "confidence": 0.65
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.788
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hepatotoxicidad.",
+      "true": {
+        "severity": "moderate",
+        "type": "hepatic",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "hepatic",
+        "mechanism": "unknown",
+        "confidence": 0.65
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "hepatic",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.838
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de rabdomiólisis.",
+      "true": {
+        "severity": "moderate",
+        "type": "muscular",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "severe",
+        "type": "muscular",
+        "mechanism": "unknown",
+        "confidence": 0.595
+      },
+      "spacy": {
+        "severity": "severe",
+        "type": "muscular",
+        "mechanism": "unknown",
+        "confidence": 0.615
+      }
+    },
+    {
+      "effect": "Inhibición del metabolismo por CYP2D6 con aumento de toxicidad.",
+      "true": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.89
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "mixed",
+        "confidence": 0.838
+      }
+    },
+    {
+      "effect": "Aumento de las concentraciones plasmáticas de quetiapina.",
+      "true": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.3
+      },
+      "spacy": {
+        "severity": "unknown",
+        "type": "efficacy_increase",
+        "mechanism": "unknown",
+        "confidence": 0.5
+      }
+    },
+    {
+      "effect": "Aumento de las concentraciones del inmunosupresor.",
+      "true": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.3
+      },
+      "spacy": {
+        "severity": "unknown",
+        "type": "efficacy_increase",
+        "mechanism": "unknown",
+        "confidence": 0.5
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de muerte súbita cardíaca.",
+      "true": {
+        "severity": "severe",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "severe",
+        "type": "cardiac",
+        "mechanism": "unknown",
+        "confidence": 0.6
+      },
+      "spacy": {
+        "severity": "severe",
+        "type": "cardiac",
+        "mechanism": "unknown",
+        "confidence": 0.612
+      }
+    },
+    {
+      "effect": "Riesgo de depresión respiratoria grave.",
+      "true": {
+        "severity": "severe",
+        "type": "cns",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "respiratory",
+        "mechanism": "unknown",
+        "confidence": 0.592
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "respiratory",
+        "mechanism": "unknown",
+        "confidence": 0.727
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hemorragia cerebral.",
+      "true": {
+        "severity": "severe",
+        "type": "hemorrhagic",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.592
+      },
+      "spacy": {
+        "severity": "severe",
+        "type": "hemorrhagic",
+        "mechanism": "unknown",
+        "confidence": 0.677
+      }
+    },
+    {
+      "effect": "Riesgo de insuficiencia hepática aguda.",
+      "true": {
+        "severity": "severe",
+        "type": "hepatic",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "severe",
+        "type": "hepatic",
+        "mechanism": "unknown",
+        "confidence": 0.595
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "hepatic",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.773
+      }
+    },
+    {
+      "effect": "Aumento leve de los niveles plasmáticos del fármaco.",
+      "true": {
+        "severity": "mild",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "mild",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.448
+      },
+      "spacy": {
+        "severity": "mild",
+        "type": "efficacy_increase",
+        "mechanism": "unknown",
+        "confidence": 0.73
+      }
+    },
+    {
+      "effect": "Posible disminución leve de la absorción.",
+      "true": {
+        "severity": "mild",
+        "type": "efficacy_reduction",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "mild",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.448
+      },
+      "spacy": {
+        "severity": "mild",
+        "type": "efficacy_reduction",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.823
+      }
+    },
+    {
+      "effect": "Ligero aumento de los niveles séricos sin significación clínica.",
+      "true": {
+        "severity": "mild",
+        "type": "other",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.3
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "efficacy_increase",
+        "mechanism": "unknown",
+        "confidence": 0.7
+      }
+    },
+    {
+      "effect": "Posible modificación de los efectos del fármaco.",
+      "true": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.3
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.5
+      }
+    },
+    {
+      "effect": "Interacción de significación clínica desconocida.",
+      "true": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.3
+      },
+      "spacy": {
+        "severity": "unknown",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.3
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hipertensión de rebote cuando se suspende la clonidina, em",
+      "true": {
+        "severity": "moderate",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.39
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic",
+        "confidence": 0.743
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de toxicidad por fenitoína.",
+      "true": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "pharmacokinetic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "unknown",
+        "confidence": 0.675
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "toxicity",
+        "mechanism": "unknown",
+        "confidence": 0.671
+      }
+    },
+    {
+      "effect": "Riesgo de vasoconstricción coronaria.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "cardiac",
+        "mechanism": "unknown",
+        "confidence": 0.757
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de ergotismo.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "toxicity",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "other",
+        "mechanism": "unknown",
+        "confidence": 0.467
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "efficacy_increase",
+        "mechanism": "unknown",
+        "confidence": 0.723
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de miopatía y rabdomiólisis.",
+      "true": {
+        "severity": "contraindicated",
+        "type": "muscular",
+        "mechanism": "unknown"
+      },
+      "regex": {
+        "severity": "contraindicated",
+        "type": "muscular",
+        "mechanism": "unknown",
+        "confidence": 0.667
+      },
+      "spacy": {
+        "severity": "contraindicated",
+        "type": "muscular",
+        "mechanism": "unknown",
+        "confidence": 0.721
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de nefrotoxicidad y ototoxicidad.",
+      "true": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "unknown",
+        "confidence": 0.675
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "renal",
+        "mechanism": "pharmacokinetic",
+        "confidence": 0.838
+      }
+    },
+    {
+      "effect": "Aumento del riesgo de hipoglucemia.",
+      "true": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "pharmacodynamic"
+      },
+      "regex": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.672
+      },
+      "spacy": {
+        "severity": "moderate",
+        "type": "metabolic",
+        "mechanism": "unknown",
+        "confidence": 0.671
+      }
+    }
+  ]
+}

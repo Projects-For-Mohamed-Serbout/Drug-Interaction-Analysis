@@ -32,6 +32,10 @@ test_config
 /build
 /coverage
 dataset details.txt
+
+# Runtime artifacts
+drug-data-engine/logs/
+*.log
 # misc
 .DS_Store
 .env.local
@@ -192,3 +196,4 @@ info
 data
 #.env
 know_path_tree-project.py
+documents

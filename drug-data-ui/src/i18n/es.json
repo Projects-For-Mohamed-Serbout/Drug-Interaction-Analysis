@@ -57,15 +57,7 @@
     "title": "Análisis NLP",
     "description": "Análisis de procesamiento de lenguaje natural de datos farmacéuticos."
   },
-  "settings": {
-    "title": "Configuración",
-    "description": "Configurar ajustes y preferencias de la aplicación."
-  },
-  "DBPerformance": {
-    "title": "Rendimiento BD",
-    "description": "Configurar ajustes y preferencias de la aplicación."
-  },
-    "search": {
+  "search": {
     "medicationsSearch": "Búsqueda de Medicamentos",
     "searchPlaceholder": "Buscar por nombre, principio activo o código nacional...",
     "searchButton": "Buscar",

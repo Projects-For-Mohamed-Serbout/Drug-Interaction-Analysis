@@ -8,7 +8,6 @@ export const MenuKey = {
   Laboratories: "laboratories",
   DatabasePerformance: "databasePerformance",
   NlpAnalysis: "nlpAnalysis",
-  Settings: "settings",
 } as const;
 
 export type MenuKey = typeof MenuKey[keyof typeof MenuKey];
@@ -56,12 +55,6 @@ export const MENU_ITEMS: MenuItem[] = [
     path: "/nlp-analysis",
     color: "#0EA5E9",
     i18nKey: "nlpAnalysis.title",
-  },
-  {
-    key: MenuKey.Settings,
-    path: "/settings",
-    color: "#6B7280",
-    i18nKey: "settings.title",
   },
 ];
 

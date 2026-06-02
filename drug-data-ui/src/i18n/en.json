@@ -57,6 +57,10 @@
     "title": "NLP Analysis",
     "description": "Natural Language Processing analysis of pharmaceutical data."
   },
+  "results": {
+    "title": "TFM Results",
+    "description": "Headline results of the project: data engineering, NLP, and database benchmarks."
+  },
   "search": {
     "medicationsSearch": "Medication Search",
     "searchPlaceholder": "Search by name, active ingredient or national code...",

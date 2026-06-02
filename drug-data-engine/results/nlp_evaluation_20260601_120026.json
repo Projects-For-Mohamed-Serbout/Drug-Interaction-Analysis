@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-04-18T20:39:30.498645",
+    "timestamp": "2026-06-01T12:00:26.443149",
     "ground_truth_samples": 44,
     "spacy_model": "es_core_news_md"
   },
@@ -28,13 +28,13 @@
             "fn": 1
           },
           "moderate": {
-            "precision": 0.905,
-            "recall": 0.76,
-            "f1": 0.826,
+            "precision": 0.92,
+            "recall": 0.92,
+            "f1": 0.92,
             "support": 25,
-            "tp": 19,
+            "tp": 23,
             "fp": 2,
-            "fn": 6
+            "fn": 2
           },
           "severe": {
             "precision": 0.5,
@@ -46,26 +46,26 @@
             "fn": 2
           },
           "unknown": {
-            "precision": 0.286,
+            "precision": 0.667,
             "recall": 1.0,
-            "f1": 0.444,
+            "f1": 0.8,
             "support": 2,
             "tp": 2,
-            "fp": 5,
+            "fp": 1,
             "fn": 0
           }
         },
         "macro": {
-          "precision": 0.738,
-          "recall": 0.785,
-          "f1": 0.714
+          "precision": 0.817,
+          "recall": 0.817,
+          "f1": 0.804
         },
         "weighted": {
-          "precision": 0.868,
-          "recall": 0.795,
-          "f1": 0.817
+          "precision": 0.894,
+          "recall": 0.886,
+          "f1": 0.886
         },
-        "accuracy": 0.795,
+        "accuracy": 0.886,
         "total_samples": 44
       },
       "spacy": {
@@ -90,44 +90,44 @@
             "fn": 1
           },
           "moderate": {
-            "precision": 0.826,
-            "recall": 0.76,
-            "f1": 0.792,
+            "precision": 0.821,
+            "recall": 0.92,
+            "f1": 0.868,
             "support": 25,
-            "tp": 19,
-            "fp": 4,
-            "fn": 6
-          },
-          "severe": {
-            "precision": 0.5,
-            "recall": 0.5,
-            "f1": 0.5,
-            "support": 4,
-            "tp": 2,
-            "fp": 2,
+            "tp": 23,
+            "fp": 5,
             "fn": 2
           },
-          "unknown": {
-            "precision": 0.333,
-            "recall": 0.5,
+          "severe": {
+            "precision": 1.0,
+            "recall": 0.25,
             "f1": 0.4,
+            "support": 4,
+            "tp": 1,
+            "fp": 0,
+            "fn": 3
+          },
+          "unknown": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.667,
             "support": 2,
             "tp": 1,
-            "fp": 2,
+            "fp": 0,
             "fn": 1
           }
         },
         "macro": {
-          "precision": 0.698,
-          "recall": 0.685,
-          "f1": 0.68
+          "precision": 0.931,
+          "recall": 0.667,
+          "f1": 0.729
         },
         "weighted": {
-          "precision": 0.787,
-          "recall": 0.773,
-          "f1": 0.775
+          "precision": 0.86,
+          "recall": 0.841,
+          "f1": 0.821
         },
-        "accuracy": 0.773,
+        "accuracy": 0.841,
         "total_samples": 44
       }
     },
@@ -579,7 +579,7 @@
         "severity": "contraindicated",
         "type": "cardiac",
         "mechanism": "pharmacodynamic",
-        "confidence": 0.752
+        "confidence": 0.74
       }
     },
     {
@@ -650,16 +650,16 @@
         "mechanism": "unknown"
       },
       "regex": {
-        "severity": "unknown",
+        "severity": "moderate",
         "type": "cns",
         "mechanism": "unknown",
-        "confidence": 0.5
+        "confidence": 0.648
       },
       "spacy": {
         "severity": "moderate",
         "type": "cns",
         "mechanism": "unknown",
-        "confidence": 0.641
+        "confidence": 0.671
       }
     },
     {
@@ -733,7 +733,7 @@
         "severity": "moderate",
         "type": "metabolic",
         "mechanism": "unknown",
-        "confidence": 0.65
+        "confidence": 0.698
       },
       "spacy": {
         "severity": "moderate",
@@ -793,13 +793,13 @@
         "severity": "moderate",
         "type": "gastrointestinal",
         "mechanism": "unknown",
-        "confidence": 0.591
+        "confidence": 0.639
       },
       "spacy": {
-        "severity": "severe",
+        "severity": "moderate",
         "type": "hemorrhagic",
         "mechanism": "unknown",
-        "confidence": 0.556
+        "confidence": 0.616
       }
     },
     {
@@ -833,13 +833,13 @@
         "severity": "moderate",
         "type": "efficacy_reduction",
         "mechanism": "unknown",
-        "confidence": 0.588
+        "confidence": 0.67
       },
       "spacy": {
         "severity": "moderate",
         "type": "efficacy_reduction",
         "mechanism": "unknown",
-        "confidence": 0.7
+        "confidence": 0.73
       }
     },
     {
@@ -853,13 +853,13 @@
         "severity": "moderate",
         "type": "efficacy_reduction",
         "mechanism": "unknown",
-        "confidence": 0.588
+        "confidence": 0.67
       },
       "spacy": {
         "severity": "moderate",
         "type": "efficacy_reduction",
         "mechanism": "unknown",
-        "confidence": 0.7
+        "confidence": 0.73
       }
     },
     {
@@ -870,16 +870,16 @@
         "mechanism": "unknown"
       },
       "regex": {
-        "severity": "unknown",
+        "severity": "moderate",
         "type": "efficacy_reduction",
         "mechanism": "unknown",
-        "confidence": 0.5
+        "confidence": 0.67
       },
       "spacy": {
         "severity": "moderate",
         "type": "efficacy_reduction",
         "mechanism": "unknown",
-        "confidence": 0.7
+        "confidence": 0.73
       }
     },
     {
@@ -893,7 +893,7 @@
         "severity": "moderate",
         "type": "hemorrhagic",
         "mechanism": "unknown",
-        "confidence": 0.63
+        "confidence": 0.678
       },
       "spacy": {
         "severity": "moderate",
@@ -933,7 +933,7 @@
         "severity": "moderate",
         "type": "renal",
         "mechanism": "unknown",
-        "confidence": 0.675
+        "confidence": 0.723
       },
       "spacy": {
         "severity": "moderate",
@@ -953,7 +953,7 @@
         "severity": "moderate",
         "type": "renal",
         "mechanism": "unknown",
-        "confidence": 0.65
+        "confidence": 0.698
       },
       "spacy": {
         "severity": "moderate",
@@ -973,7 +973,7 @@
         "severity": "moderate",
         "type": "hepatic",
         "mechanism": "unknown",
-        "confidence": 0.65
+        "confidence": 0.698
       },
       "spacy": {
         "severity": "moderate",
@@ -996,10 +996,10 @@
         "confidence": 0.595
       },
       "spacy": {
-        "severity": "severe",
+        "severity": "moderate",
         "type": "muscular",
         "mechanism": "unknown",
-        "confidence": 0.615
+        "confidence": 0.674
       }
     },
     {
@@ -1030,16 +1030,16 @@
         "mechanism": "pharmacokinetic"
       },
       "regex": {
-        "severity": "unknown",
+        "severity": "moderate",
         "type": "other",
         "mechanism": "unknown",
-        "confidence": 0.3
+        "confidence": 0.448
       },
       "spacy": {
-        "severity": "unknown",
+        "severity": "moderate",
         "type": "efficacy_increase",
         "mechanism": "unknown",
-        "confidence": 0.5
+        "confidence": 0.73
       }
     },
     {
@@ -1050,16 +1050,16 @@
         "mechanism": "pharmacokinetic"
       },
       "regex": {
-        "severity": "unknown",
+        "severity": "moderate",
         "type": "other",
         "mechanism": "unknown",
-        "confidence": 0.3
+        "confidence": 0.448
       },
       "spacy": {
-        "severity": "unknown",
+        "severity": "moderate",
         "type": "efficacy_increase",
         "mechanism": "unknown",
-        "confidence": 0.5
+        "confidence": 0.73
       }
     },
     {
@@ -1079,7 +1079,7 @@
         "severity": "severe",
         "type": "cardiac",
         "mechanism": "unknown",
-        "confidence": 0.612
+        "confidence": 0.567
       }
     },
     {
@@ -1093,13 +1093,13 @@
         "severity": "moderate",
         "type": "respiratory",
         "mechanism": "unknown",
-        "confidence": 0.592
+        "confidence": 0.673
       },
       "spacy": {
         "severity": "moderate",
         "type": "respiratory",
         "mechanism": "unknown",
-        "confidence": 0.727
+        "confidence": 0.757
       }
     },
     {
@@ -1113,13 +1113,13 @@
         "severity": "moderate",
         "type": "hemorrhagic",
         "mechanism": "unknown",
-        "confidence": 0.592
+        "confidence": 0.673
       },
       "spacy": {
-        "severity": "severe",
+        "severity": "moderate",
         "type": "hemorrhagic",
         "mechanism": "unknown",
-        "confidence": 0.677
+        "confidence": 0.689
       }
     },
     {
@@ -1139,7 +1139,7 @@
         "severity": "moderate",
         "type": "hepatic",
         "mechanism": "pharmacokinetic",
-        "confidence": 0.773
+        "confidence": 0.826
       }
     },
     {
@@ -1253,13 +1253,13 @@
         "severity": "moderate",
         "type": "other",
         "mechanism": "unknown",
-        "confidence": 0.39
+        "confidence": 0.472
       },
       "spacy": {
         "severity": "moderate",
         "type": "cardiac",
         "mechanism": "pharmacodynamic",
-        "confidence": 0.743
+        "confidence": 0.773
       }
     },
     {
@@ -1273,7 +1273,7 @@
         "severity": "moderate",
         "type": "toxicity",
         "mechanism": "unknown",
-        "confidence": 0.675
+        "confidence": 0.723
       },
       "spacy": {
         "severity": "moderate",
@@ -1353,7 +1353,7 @@
         "severity": "moderate",
         "type": "renal",
         "mechanism": "unknown",
-        "confidence": 0.675
+        "confidence": 0.723
       },
       "spacy": {
         "severity": "moderate",

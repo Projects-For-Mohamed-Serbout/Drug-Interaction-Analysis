@@ -26,6 +26,7 @@ interface Interaction {
       mecanismo?: string;
       enzimas?: string[];
       transportadores?: string[];
+      confianza?: number;
       confianza_general?: number;
     };
   };
@@ -44,8 +45,6 @@ const SEVERITY_OPTIONS = [
   { value: "contraindicated", label: "Contraindicated" },
   { value: "severe", label: "Severe" },
   { value: "moderate", label: "Moderate" },
-  { value: "mild", label: "Mild" },
-  { value: "unknown", label: "Unknown" },
 ];
 
 const TYPE_OPTIONS = [
@@ -193,6 +192,9 @@ const Interactions = () => {
         ) : (
           data?.items.map((interaction) => {
             const nlp = interaction.interaccion.nlp;
+            // Production NLP is the regex pipeline (field "confianza"); fall back to
+            // the spaCy field name only if the regex value is absent.
+            const overallConf = nlp?.confianza ?? nlp?.confianza_general;
             const isExpanded = expandedId === interaction._id;
 
             return (
@@ -265,29 +267,29 @@ const Interactions = () => {
                             NLP Analysis
                           </p>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <NlpField label="Severity" value={nlp.severidad} confidence={nlp.severidad_confianza} />
+                            <NlpField label="Severity" value={nlp.severidad} />
                             <NlpField label="Type" value={nlp.tipo} />
                             <NlpField label="Effect Category" value={nlp.categoria_efecto} />
                             <NlpField label="Mechanism" value={nlp.mecanismo} />
                           </div>
 
                           {/* Confidence Bar */}
-                          {nlp.confianza_general != null && (
+                          {overallConf != null && (
                             <div className="mt-3">
                               <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
                                 <span>Overall Confidence</span>
-                                <span className="font-medium">{(nlp.confianza_general * 100).toFixed(1)}%</span>
+                                <span className="font-medium">{(overallConf * 100).toFixed(1)}%</span>
                               </div>
                               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                 <div
                                   className={`h-2 rounded-full transition-all ${
-                                    nlp.confianza_general >= 0.7
+                                    overallConf >= 0.7
                                       ? "bg-green-500"
-                                      : nlp.confianza_general >= 0.5
+                                      : overallConf >= 0.5
                                       ? "bg-yellow-500"
                                       : "bg-red-500"
                                   }`}
-                                  style={{ width: `${nlp.confianza_general * 100}%` }}
+                                  style={{ width: `${overallConf * 100}%` }}
                                 />
                               </div>
                             </div>

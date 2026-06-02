@@ -85,6 +85,10 @@ class SeverityClassifier:
 
         # Moderate patterns
         self.moderate_patterns = [
+            # "Asociación desaconsejada" is the most common CIMA phrase for a
+            # moderate interaction (one level below "contraindicada").
+            (r'\bdesaconsejad[ao]s?\b', 0.7),
+            (r'\basociación\s+desaconsejada\b', 0.75),
             (r'\bprecaución\b', 0.7),
             (r'\bmonitorizar\b', 0.75),
             (r'\bvigilar\b', 0.7),
@@ -93,6 +97,7 @@ class SeverityClassifier:
             (r'\breducir\s+(?:la\s+)?dosis\b', 0.75),
             (r'\baumentar?\s+(?:el\s+)?riesgo\b', 0.7),
             (r'\bdisminuci[oó]n\s+del?\s+efecto\b', 0.65),
+            (r'\breducci[oó]n\s+del?\s+efecto\b', 0.65),
             (r'\baumento\s+del?\s+efecto\b', 0.65),
             (r'\bpotenciación\b', 0.65),
             (r'\btoxicidad\b', 0.75),

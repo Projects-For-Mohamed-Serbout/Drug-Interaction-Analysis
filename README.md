@@ -1,275 +1,155 @@
 # 🏥 Drug Interaction Data Engineering and Analysis
 
-## 📌 Project Overview
+Master's Thesis (TFM) — *Ingeniería y Análisis de Datos de Interacciones Farmacológicas* — Universidad de Málaga.
 
-In the field of health, data on medications and their possible interactions play a fundamental role in **patient safety** and **treatment efficiency**. However, the **complexity and volume** of these data pose significant challenges in terms of **management, storage, and analysis**.
+An end-to-end pipeline that takes the Spanish **CIMA** pharmaceutical dataset (XML), loads it into two
+NoSQL databases (**MongoDB** + **Neo4j**), enriches drug-interaction text with **NLP**, **benchmarks** the
+two databases, and exposes everything through a **FastAPI** REST API and a **React** dashboard.
 
-This **Master's Thesis (TFM)** focuses on addressing these challenges using **NoSQL technologies** and **Natural Language Processing (NLP)** to improve drug interaction data handling.
-
-## 📊 Data Source
-
-- **CIMA (Centro de Información de Medicamentos)** Database:  
-  👉 [CIMA Nomenclator](https://cima.aemps.es/cima/publico/nomenclator.html)  
-  Managed by **AEMPS (Agencia Española de Medicamentos y Productos Sanitarios)**, this dataset contains **medication details in XML format**.
-
-## 🎯 Objectives
-
-- **Improve storage, querying, and analysis** of pharmacological interaction data.
-- **Use NoSQL databases** (MongoDB & Neo4j) for efficient handling of semi-structured and unstructured data.
-- **Apply NLP techniques** to extract valuable insights from textual descriptions in the dataset.
-- **Provide a scalable solution** that benefits healthcare professionals, developers, and researchers.
 ---
 
-## 🛠 Methodology
-To ensure structured development, this project follows an **incremental and prototype-based methodology**:
-1. **Incremental Development**  
-   - Progressively develop modules: XML processing → NoSQL database setup → NLP integration.
-2. **Iterative Prototyping**  
-   - Each module undergoes functional testing before moving to the next stage.
-3. **Continuous Evaluation**  
-   - Regular performance and functionality checks to optimize results.
----
-****
-## 🏗️ Tech Stack
+## 📦 What the project contains
 
-- **Backend**: Python 3.9+, FastAPI
-- **Frontend**: React 19, TypeScript, Vite, TailwindCSS
-- **Databases**: MongoDB, Neo4j
-- **Data Processing**: NLP, Pandas
-- **Development Tools**: Git
+| Part | Description | Entry point |
+|------|-------------|-------------|
+| **1. ETL** | Parse CIMA XML → MongoDB (documents) + Neo4j (graph) | `drug-data-engine/run_etl.py` |
+| **2. NLP** | Classify each interaction's severity / type / mechanism (regex + spaCy) | `drug-data-engine/run_nlp.py` |
+| **3. Benchmarks** | MongoDB vs Neo4j: speed (19 queries) + scalability | `drug-data-engine/run_benchmarks.py`, `run_scalability.py` |
+| **4. REST API** | FastAPI service over both databases | `drug-data-engine/src/api/main.py` |
+| **5. Dashboard** | React + TypeScript UI (incl. a Results overview) | `drug-data-ui/` |
+
+---
+
+## 📊 Data source
+
+**CIMA — Nomenclátor de prescripción** (AEMPS): <https://cima.aemps.es/cima/publico/nomenclator.html>
+~30,000 drugs · ~70,000 interactions · 13 reference dictionaries, in XML.
+
+> The XML files are **not** included in the repository (they are large). They are only needed to
+> **re-run the ETL from scratch** — see [Optional: rebuild the data](#-optional-rebuild-the-data-from-scratch).
+> For normal use the cloud databases are already populated.
 
 ---
 
 ## 📋 Prerequisites
 
-Before setting up the project, ensure you have the following installed:
+- **Python 3.10+** — <https://www.python.org/downloads/>
+- **Node.js 18+** and **npm** — <https://nodejs.org/>
+- **Git** — <https://git-scm.com/downloads>
 
-- **Python 3.9+** ([Download Python](https://www.python.org/downloads/))
-- **Node.js 18+** and **npm** ([Download Node.js](https://nodejs.org/))
-- **Git** ([Download Git](https://git-scm.com/downloads))
-
-> **Note**: This project uses **MongoDB Atlas** and **Neo4j Aura DB** (cloud databases). You do NOT need to install MongoDB or Neo4j locally. Database credentials will be provided by the project owner.
+> The project uses **MongoDB Atlas** and **Neo4j Aura** (cloud). You do **not** need to install any
+> database locally. Connection details are in `drug-data-engine/.env`.
 
 ---
 
-## 🚀 Setup Instructions
+## 🚀 Quick start (clone → running app)
 
-### **1️⃣ Clone the Repository**
+### 1) Clone
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/Drug-Interaction-Analysis.git
+git clone https://github.com/<your-username>/Drug-Interaction-Analysis.git
 cd Drug-Interaction-Analysis
 ```
 
-### **2️⃣ Get Database Credentials**
-
-This project uses **MongoDB Atlas** and **Neo4j Aura DB** (cloud databases). You do **NOT** need to install or set up these databases yourself.
-
-**Contact the project owner to obtain the following credentials:**
-
-- MongoDB Atlas connection URI
-- Neo4j Aura connection URI, username, and password
-
-Once you receive the credentials, you'll add them to the `.env` file in the next step.
-
-### **3️⃣ Backend Setup (drug-data-engine)**
-
-#### **Navigate to Backend Directory**
+### 2) Backend (drug-data-engine)
 
 ```bash
 cd drug-data-engine
-```
 
-#### **Create Virtual Environment**
-
-**On macOS/Linux:**
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-**On Windows:**
-```bash
+# create + activate a virtual environment
 python -m venv venv
+# Windows:
 .\venv\Scripts\activate
-```
+# macOS/Linux:
+# source venv/bin/activate
 
-> **Note**: After activation, you should see `(venv)` in your terminal prompt.
-
-#### **Install Dependencies**
-
-```bash
+# install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-#### **Configure Environment Variables**
+The `.env` file with the database credentials is included in `drug-data-engine/`. (If you use your own
+databases instead, edit the values there — keys: `mongodb_uri`, `mongodb_db`, `neo4j_uri`, `neo4j_user`,
+`neo4j_password`, `data_path`.)
 
-1. **Copy the sample environment file** to create your `.env` file:
-
-```bash
-cp .env.sample .env  # macOS/Linux
-# or
-copy .env.sample .env  # Windows
-```
-
-2. **Fill in the credentials** in the `.env` file:
-   - **Contact the project owner** to obtain the database credentials
-   - Add your MongoDB Atlas connection URI to `MONGODB_URI`
-   - Add your Neo4j Aura URI to `NEO4J_URI`
-   - Add your Neo4j username to `NEO4J_USER`
-   - Add your Neo4j password to `NEO4J_PASSWORD`
-   - Generate and add a secret key to `SECRET_KEY` (you can generate one using: `python -c "import secrets; print(secrets.token_urlsafe(32))"`)
-
-> **Important**: 
-> - The `.env.sample` file is a template - **do not** put your actual credentials in it
-> - **Never commit the `.env` file to version control!** It contains sensitive credentials
-> - Make sure all required fields are filled in before running the application
-
-#### **Run the Backend Server**
-
-Make sure you're in the `drug-data-engine/` directory and your virtual environment is activated:
+Run the API server **from the `drug-data-engine/` folder**:
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn src.api.main:app --reload
 ```
 
-The FastAPI server will start at: **http://localhost:8000**
+- API: <http://localhost:8000>
+- Swagger docs: <http://localhost:8000/docs>
+- Health check: <http://localhost:8000/health>
 
-- **API Documentation**: http://localhost:8000/docs
-- **Alternative Docs**: http://localhost:8000/redoc
+### 3) Frontend (drug-data-ui)
 
-### **4️⃣ Frontend Setup (drug-data-ui)**
-
-#### **Navigate to Frontend Directory**
-
-Open a **new terminal window** (keep the backend running) and navigate to the frontend directory:
+Open a **second terminal** (keep the backend running):
 
 ```bash
 cd drug-data-ui
-```
-
-#### **Install Dependencies**
-
-```bash
 npm install
-```
-
-#### **Run the Development Server**
-
-```bash
 npm run dev
 ```
 
-The Vite development server will start at: **http://localhost:5173**
+- Dashboard: <http://localhost:5173>  (it talks to the API at `http://localhost:8000`)
 
-> **Note**: The frontend is configured to connect to the backend API at `http://localhost:8000`. Make sure the backend is running before starting the frontend.
-
----
-
-## 🎯 Running the Complete Project
-
-To run the full application:
-
-1. **Terminal 1 - Backend:**
-   ```bash
-   cd drug-data-engine
-   source venv/bin/activate  # or .\venv\Scripts\activate on Windows
-   uvicorn app.main:app --reload
-   ```
-
-2. **Terminal 2 - Frontend:**
-   ```bash
-   cd drug-data-ui
-   npm run dev
-   ```
-
-3. **Access the Application:**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
+That's it — the dashboard pages (Dashboard, **Results**, Medications, Interactions, NLP Analysis,
+Database Performance, …) are populated from the cloud databases and the result files in
+`drug-data-engine/results/`.
 
 ---
 
-## 📁 Project Structure
+## 🗂 Project structure
 
 ```
 Drug-Interaction-Analysis/
-├── data/                          # Data files (XML and CSV)
-│   ├── convert-to-csv/           # Converted CSV files
-│   └── *.xml                      # Original XML data files
-├── drug-data-engine/              # Backend (FastAPI)
-│   ├── app/
-│   │   ├── api/                  # API routes
-│   │   ├── core/                 # Configuration and database
-│   │   ├── extractor/            # XML parsing and extraction
-│   │   ├── loader/               # Database loaders
-│   │   ├── schemas/              # Pydantic schemas
-│   │   └── services/             # Business logic
-│   ├── requirements.txt          # Python dependencies
-│   ├── setup.py                  # Package setup
-│   ├── .env.sample               # Environment variables template
-│   └── .env                      # Environment variables (create from .env.sample)
-├── drug-data-ui/                  # Frontend (React + Vite)
+├── data/                              # CIMA XML files (not in repo — download separately)
+├── design/                            # Schema & architecture design documents
+├── drug-data-engine/                  # Backend (Python)
+│   ├── run_etl.py                     # ETL pipeline
+│   ├── run_nlp.py                     # NLP processing
+│   ├── run_benchmarks.py              # MongoDB vs Neo4j speed benchmark
+│   ├── run_scalability.py             # Scalability benchmark
+│   ├── requirements.txt
+│   ├── .env                           # DB credentials
 │   ├── src/
-│   │   ├── api/                  # API client
-│   │   ├── components/           # React components
-│   │   ├── pages/                # Page components
-│   │   └── ...
-│   ├── package.json              # Node.js dependencies
-│   └── vite.config.ts            # Vite configuration
-└── README.md                      # This file
+│   │   ├── api/                       # FastAPI app (main.py) + routes + schemas
+│   │   ├── config/                    # Settings (.env loader)
+│   │   ├── extractors/                # XML parsing
+│   │   ├── transformers/              # Reshape data for each database
+│   │   ├── loaders/                   # MongoDB + Neo4j loaders
+│   │   ├── models/                    # Domain dataclasses
+│   │   ├── nlp/                       # Regex NLP classifiers
+│   │   ├── nlp_spacy/                 # spaCy + NLTK NLP classifiers
+│   │   ├── benchmarks/                # Benchmark framework + queries
+│   │   ├── services/                  # MongoDB / Neo4j query services
+│   │   └── utils/
+│   ├── scripts/                       # create_indexes, verify_data_integrity, evaluate_nlp, sync_nlp_to_neo4j, …
+│   ├── notebooks/                     # Data exploration + NLP evaluation notebooks
+│   ├── results/                       # Benchmark / scalability / NLP-eval / integrity outputs (JSON+CSV)
+│   └── tests/                         # Unit tests
+├── drug-data-ui/                      # Frontend (React + TypeScript + Vite)
+│   └── src/
+│       ├── api/                       # Axios clients (one per API route group)
+│       ├── components/                # Layout, Sidebar, Navbar, …
+│       └── pages/                     # Dashboard, Results, Interactions, NLPAnalysis, DBPerformance, …
+└── README.md
 ```
 
 ---
 
-## 🔧 Additional Commands
+## 🛠 Tech stack
 
-### **Backend Commands**
+- **Backend:** Python, FastAPI, `xml.etree.ElementTree`, PyMongo, Neo4j Python Driver
+- **NLP:** spaCy (`es_core_news_md`) + NLTK, plus a rule/regex approach
+- **Databases:** MongoDB Atlas (documents) + Neo4j Aura (graph)
+- **Frontend:** React 19, TypeScript, Vite, TailwindCSS, i18n (es/en), dark mode
 
-```bash
-# Run with specific host and port
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-
-# Run tests (if available)
-pytest
-
-# Format code
-black .
-isort .
-
-# Lint code
-flake8 .
-```
-
-### **Frontend Commands**
-
-```bash
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Run linter
-npm run lint
-```
 
 ---
-****
+
 ## 👤 Author
 
-**Mohamed Serbout**  
-Email: m.serbout7@outlook.com
-
----
-
-## 📄 License
-
-This project is part of a Master's Thesis (TFM) and is for educational/research purposes.
-
----
-
-## 🤝 Contributing
-
-This is a Master's Thesis project. For questions or suggestions, please contact the author.
+**Mohamed Serbout** — Máster Universitario en Ingeniería Informática, Universidad de Málaga.
+Tutors: José Manuel García Nieto · Ismael Navas Delgado.

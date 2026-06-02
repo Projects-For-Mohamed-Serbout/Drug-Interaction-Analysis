@@ -2,6 +2,7 @@ import type { MenuItem } from "./interfaces";
 
 export const MenuKey = {
   Dashboard: "dashboard",
+  Results: "results",
   Medications: "medications",
   Interactions: "interactions",
   ActiveIngredients: "activeIngredients",
@@ -19,6 +20,12 @@ export const MENU_ITEMS: MenuItem[] = [
     path: "/",
     color: "#3B82F6",
     i18nKey: "dashboard.title",
+  },
+  {
+    key: MenuKey.Results,
+    path: "/results",
+    color: "#14B8A6",
+    i18nKey: "results.title",
   },
   {
     key: MenuKey.Medications,

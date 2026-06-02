@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-06-01T11:06:42.574720",
+  "summary": {
+    "pass": 21,
+    "warn": 0,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "Drugs: XML == MongoDB",
+      "status": "PASS",
+      "detail": "XML=29,784  Mongo=29,784"
+    },
+    {
+      "name": "Drugs: XML == Neo4j",
+      "status": "PASS",
+      "detail": "XML=29,784  Neo4j=29,784"
+    },
+    {
+      "name": "Interactions: XML raw == MongoDB docs",
+      "status": "PASS",
+      "detail": "XML=70,682  Mongo=70,682"
+    },
+    {
+      "name": "Interactions: XML distinct pairs == Neo4j edges",
+      "status": "PASS",
+      "detail": "XML_distinct=69,696  Neo4j=69,696"
+    },
+    {
+      "name": "Interaction dedup is fully explained",
+      "status": "PASS",
+      "detail": "MongoDB raw=70,682  Neo4j unique=69,696  duplicate (drug,ATC) rows collapsed=986"
+    },
+    {
+      "name": "Reference 'active_ingredients'",
+      "status": "PASS",
+      "detail": "XML=3,336  Mongo=3,336  Neo4j=3,336"
+    },
+    {
+      "name": "Reference 'laboratories'",
+      "status": "PASS",
+      "detail": "XML=1,602  Mongo=1,602  Neo4j=1,602"
+    },
+    {
+      "name": "Reference 'atc_codes'",
+      "status": "PASS",
+      "detail": "XML=7,242  Mongo=7,242  Neo4j=7,242"
+    },
+    {
+      "name": "Reference 'pharmaceutical_forms'",
+      "status": "PASS",
+      "detail": "XML=268  Mongo=268  Neo4j=268"
+    },
+    {
+      "name": "Reference 'administration_routes'",
+      "status": "PASS",
+      "detail": "XML=59  Mongo=59  Neo4j=59"
+    },
+    {
+      "name": "Reference 'excipients'",
+      "status": "PASS",
+      "detail": "XML=574  Mongo=574  Neo4j=574"
+    },
+    {
+      "name": "Reference 'package_types'",
+      "status": "PASS",
+      "detail": "XML=65  Mongo=65  Neo4j=65"
+    },
+    {
+      "name": "Reference 'content_units'",
+      "status": "PASS",
+      "detail": "XML=57  Mongo=57"
+    },
+    {
+      "name": "Reference 'registration_statuses'",
+      "status": "PASS",
+      "detail": "XML=3  Mongo=3"
+    },
+    {
+      "name": "Reference 'dcsa'",
+      "status": "PASS",
+      "detail": "XML=2,476  Mongo=2,476"
+    },
+    {
+      "name": "Reference 'dcp'",
+      "status": "PASS",
+      "detail": "XML=6,988  Mongo=6,988"
+    },
+    {
+      "name": "Reference 'dcpf'",
+      "status": "PASS",
+      "detail": "XML=10,360  Mongo=10,360"
+    },
+    {
+      "name": "Mongo: interactions reference an existing origin drug",
+      "status": "PASS",
+      "detail": "missing=0"
+    },
+    {
+      "name": "Mongo: target ATC codes exist in dictionary",
+      "status": "PASS",
+      "detail": "missing=0"
+    },
+    {
+      "name": "Neo4j: all INTERACTS_WITH_ATC end on an ATCCode",
+      "status": "PASS",
+      "detail": "violations=0"
+    },
+    {
+      "name": "Neo4j: Drug.cod_nacion is unique",
+      "status": "PASS",
+      "detail": "duplicates=0"
+    }
+  ],
+  "xml": {
+    "drugs": 29784,
+    "interactions_raw": 70682,
+    "interactions_distinct_pairs": 69696,
+    "interactions_duplicate_rows": 986,
+    "duplicities": 46665,
+    "biomarkers": 5464,
+    "reference": {
+      "active_ingredients": 3336,
+      "laboratories": 1602,
+      "atc_codes": 7242,
+      "pharmaceutical_forms": 268,
+      "simplified_pharmaceutical_forms": 72,
+      "administration_routes": 59,
+      "excipients": 574,
+      "package_types": 65,
+      "content_units": 57,
+      "registration_statuses": 3,
+      "dcsa": 2476,
+      "dcp": 6988,
+      "dcpf": 10360
+    }
+  },
+  "mongodb": {
+    "drugs": 29784,
+    "drug_interactions": 70682,
+    "reference": {
+      "active_ingredients": 3336,
+      "laboratories": 1602,
+      "atc_codes": 7242,
+      "pharmaceutical_forms": 268,
+      "administration_routes": 59,
+      "excipients": 574,
+      "package_types": 65,
+      "content_units": 57,
+      "registration_statuses": 3,
+      "dcsa": 2476,
+      "dcp": 6988,
+      "dcpf": 10360
+    },
+    "referential": {
+      "interactions_with_missing_origin_drug": 0,
+      "target_atc_codes_not_in_dictionary": 0
+    }
+  },
+  "neo4j": {
+    "nodes": {
+      "Drug": 29784
+    },
+    "relationships": {
+      "INTERACTS_WITH_ATC": 69696,
+      "CLASSIFIED_AS": 29784,
+      "MANUFACTURED_BY": 29784,
+      "CONTAINS": 34398
+    },
+    "reference": {
+      "active_ingredients": 3336,
+      "laboratories": 1602,
+      "atc_codes": 7242,
+      "pharmaceutical_forms": 268,
+      "administration_routes": 59,
+      "excipients": 574,
+      "package_types": 65
+    },
+    "referential": {
+      "interacts_edges_with_non_atc_target": 0,
+      "duplicate_drug_cod_nacion": 0
+    }
+  }
+}

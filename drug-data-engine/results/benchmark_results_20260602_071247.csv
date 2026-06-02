@@ -1,0 +1,20 @@
+query_name,description,category,mongodb_avg_ms,mongodb_median_ms,mongodb_p95_ms,mongodb_min_ms,mongodb_max_ms,mongodb_std_dev_ms,mongodb_cv,mongodb_rows,neo4j_avg_ms,neo4j_median_ms,neo4j_p95_ms,neo4j_min_ms,neo4j_max_ms,neo4j_std_dev_ms,neo4j_cv,neo4j_rows,row_count_match,speedup_factor,winner
+Q01_drug_lookup,Find single drug by national code (indexed),Point Lookup,38.75,37.597,44.797,36.288,51.783,3.246,0.0838,1,39.859,39.559,41.798,38.112,44.9,1.213,0.0304,1,True,0.95,Comparable
+Q02_interactions_for_drug,Find all interactions for a specific drug,Relationship Traversal,36.814,36.789,37.751,35.785,39.065,0.646,0.0175,26,42.998,42.688,45.112,40.914,51.718,1.995,0.0464,26,True,0.86,MongoDB
+Q03_contraindicated,Find interactions with NLP severity = CONTRAINDICATED,Range Scan,119.289,114.087,148.643,101.43,157.621,14.866,0.1246,1000,176.122,174.917,198.694,151.68,242.385,17.797,0.101,1000,True,0.65,MongoDB
+Q04_cardiac_interactions,Find interactions with NLP type = CARDIAC,Range Scan,122.064,115.917,157.059,101.133,183.976,19.612,0.1607,1000,183.801,181.206,238.963,147.832,277.583,27.239,0.1482,1000,True,0.64,MongoDB
+Q05_text_search,Search drugs by name pattern (regex),Text Search,53.436,52.337,60.512,50.695,63.807,3.258,0.061,100,49.124,49.917,52.087,45.176,57.899,2.858,0.0582,100,True,1.05,Comparable
+Q06_count_by_severity,Count interactions grouped by NLP severity,Aggregation,204.766,204.623,279.011,156.404,307.246,34.716,0.1695,3,55.636,55.488,58.019,53.699,58.211,1.155,0.0208,3,True,3.69,Neo4J
+Q07_atc_prefix_search,Find drugs by ATC code prefix,Range Scan,92.743,91.428,103.303,83.624,119.456,7.174,0.0773,500,82.954,76.241,92.122,68.683,291.606,39.909,0.4811,500,True,1.2,Neo4J
+Q08_complex_filter,Severe/contraindicated cardiac interactions for ATC class N,Complex Filter,194.626,190.434,256.015,146.669,307.076,35.216,0.1809,500,81.669,79.81,97.035,72.16,118.737,9.55,0.1169,500,True,2.39,Neo4J
+Q09_top_interacting_drugs,Top 10 drugs with most interactions (aggregation),Aggregation,131.248,121.735,188.462,115.735,254.265,29.499,0.2248,10,100.847,98.806,113.432,93.386,132.999,8.001,0.0793,10,True,1.23,Neo4J
+Q10_drugs_with_ingredient,Find drugs containing a specific active ingredient,Relationship Traversal,74.221,70.838,95.933,66.902,111.243,10.156,0.1368,100,49.125,49.02,53.507,45.608,55.188,2.55,0.0519,100,True,1.45,Neo4J
+Q11_type_distribution,Distribution of NLP interaction types (aggregation),Aggregation,235.498,204.78,319.008,169.957,409.36,63.83,0.271,12,63.068,55.892,61.42,54.681,256.145,36.504,0.5788,12,True,3.66,Neo4J
+Q12_cross_class_interactions,Find interactions between two ATC classes (N and C),Complex Filter,100.288,99.745,110.577,89.682,118.259,6.855,0.0684,500,86.781,84.175,106.889,75.264,123.61,11.137,0.1283,500,True,1.18,Neo4J
+Q13_mechanism_distribution,Distribution of NLP interaction mechanisms,Aggregation,211.6,204.656,306.845,154.08,316.993,46.104,0.2179,3,56.101,55.784,59.699,54.208,61.932,1.949,0.0347,3,True,3.67,Neo4J
+Q14_high_risk_drugs,Drugs with 50+ severe/contraindicated interactions,Complex Filter,94.322,93.074,99.089,90.804,117.031,4.808,0.051,0,81.807,78.881,93.479,76.773,123.694,9.061,0.1108,0,True,1.18,Neo4J
+Q15_effect_text_search,Search interaction effect text for keyword,Text Search,108.715,101.784,121.003,98.949,234.996,24.559,0.2259,47,104.277,93.142,138.894,89.806,303.392,39.492,0.3787,47,True,1.09,Comparable
+Q16_interaction_chain,Indirect interaction chains through shared ATC classes,Multi-hop Traversal,,,,,,,,,51.728,51.4,59.753,46.401,68.132,4.879,0.0943,100,,,Neo4J only
+Q17_common_targets,Shared ATC interaction targets between two drugs,Pattern Matching,,,,,,,,,43.835,42.892,48.472,41.057,56.751,3.181,0.0726,26,,,Neo4J only
+Q18_class_interaction_profile,Drugs in same ATC class with their interaction counts,Pattern Matching,,,,,,,,,51.606,50.034,57.882,46.465,72.053,5.069,0.0982,50,,,Neo4J only
+Q19_atc_interaction_network,ATC-level interaction network (class-to-class aggregation),Aggregation,,,,,,,,,123.027,111.26,164.454,107.023,306.105,37.729,0.3067,50,,,Neo4J only

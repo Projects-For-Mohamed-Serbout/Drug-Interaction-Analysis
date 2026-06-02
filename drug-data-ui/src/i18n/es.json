@@ -57,6 +57,10 @@
     "title": "Análisis NLP",
     "description": "Análisis de procesamiento de lenguaje natural de datos farmacéuticos."
   },
+  "results": {
+    "title": "Resultados TFM",
+    "description": "Resultados principales del proyecto: ingeniería de datos, NLP y benchmarks de bases de datos."
+  },
   "search": {
     "medicationsSearch": "Búsqueda de Medicamentos",
     "searchPlaceholder": "Buscar por nombre, principio activo o código nacional...",

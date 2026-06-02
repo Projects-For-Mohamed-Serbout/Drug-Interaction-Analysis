@@ -66,9 +66,11 @@ async def get_benchmark_results():
             else:
                 cat_stats[category]['c'] += 1
 
-        if mongo_ms is not None:
+        # Overall averages use ONLY comparable queries (both DBs present) so the
+        # MongoDB vs Neo4j comparison is symmetric and consistent with the report.
+        # Graph-exclusive (Neo4j-only) queries are excluded from the average.
+        if is_comparable:
             mongodb_times.append(mongo_ms)
-        if neo4j_ms is not None:
             neo4j_times.append(neo4j_ms)
 
         if item.get('row_count_match') is False:
@@ -130,6 +132,67 @@ async def get_benchmark_results():
         iterations=metadata.get('iterations_per_query'),
         row_count_mismatches=row_count_mismatches,
     )
+
+
+@router.get("/scalability")
+async def get_scalability_results():
+    """Get the latest scalability benchmark results (latency vs data volume)."""
+    results_dir = Path(__file__).parent.parent.parent.parent / 'results'
+    files = sorted(results_dir.glob('scalability_results_*.json'), reverse=True)
+    if not files:
+        raise HTTPException(
+            status_code=404,
+            detail="No scalability results found. Run run_scalability.py first."
+        )
+
+    with open(files[0], encoding='utf-8') as f:
+        data = json.load(f)
+
+    rows = data.get('results', [])
+    sizes = sorted({r['size_pct'] for r in rows})
+
+    labels = {
+        'count_by_severity': 'Count by severity (aggregation)',
+        'count_contraindicated': 'Count contraindicated (filtered)',
+        'count_cardiac': 'Count cardiac (filtered)',
+        'top_interacting': 'Top interacting drugs (group + sort)',
+    }
+
+    # Preserve query order as it appears in the results
+    qnames = []
+    for r in rows:
+        if r['query'] not in qnames:
+            qnames.append(r['query'])
+
+    def series(query, dbname):
+        return [
+            next((x['median_ms'] for x in rows
+                  if x['query'] == query and x['database'] == dbname and x['size_pct'] == s), None)
+            for s in sizes
+        ]
+
+    def factor(arr):
+        return round(arr[-1] / arr[0], 2) if arr and arr[0] else None
+
+    queries = []
+    for q in qnames:
+        mongo = series(q, 'MongoDB')
+        neo = series(q, 'Neo4j')
+        queries.append({
+            'query': q,
+            'label': labels.get(q, q),
+            'mongodb': mongo,
+            'neo4j': neo,
+            'scaling': {'mongodb': factor(mongo), 'neo4j': factor(neo)},
+        })
+
+    return {
+        'sizes': sizes,
+        'queries': queries,
+        'iterations': data.get('iterations'),
+        'method': data.get('method'),
+        'total_drugs': data.get('total_drugs'),
+    }
 
 
 @router.get("/graph-stats")

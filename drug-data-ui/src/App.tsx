@@ -9,6 +9,7 @@ import ActiveIngredients from "./pages/ActiveIngredients";
 import Laboratories from "./pages/Laboratories";
 import DBPerformance from "./pages/DBPerformance";
 import NLPAnalysis from "./pages/NLPAnalysis";
+import Results from "./pages/Results";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/results" element={<Results />} />
           <Route path="/medications" element={<Medications />} />
           <Route path="/interactions" element={<Interactions />} />
           <Route path="/active-ingredients" element={<ActiveIngredients />} />

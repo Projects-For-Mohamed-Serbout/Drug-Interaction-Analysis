@@ -75,21 +75,23 @@ def create_mongodb_indexes(client: MongoClient, db_name: str, drop_existing: boo
     drugs_collection.create_index([('nombre_comercial', TEXT)], name='idx_nombre_comercial_text')
     logger.info("  ✓ Created text index: nombre_comercial")
 
-    # Index for active ingredient search
-    drugs_collection.create_index([('principios_activos.nombre', ASCENDING)], name='idx_principios_activos')
-    logger.info("  ✓ Created index: principios_activos.nombre")
+    # Index for active ingredient search (actual nested path)
+    drugs_collection.create_index(
+        [('formas_farmaceuticas.composicion.principio_activo.nombre', ASCENDING)],
+        name='idx_principio_activo_nombre')
+    logger.info("  ✓ Created index: formas_farmaceuticas.composicion.principio_activo.nombre")
 
-    # Index for ATC code prefix search
-    drugs_collection.create_index([('atc_codes', ASCENDING)], name='idx_atc_codes')
-    logger.info("  ✓ Created index: atc_codes")
+    # Index for ATC code prefix search (actual path: atc.codigo)
+    drugs_collection.create_index([('atc.codigo', ASCENDING)], name='idx_atc_codigo')
+    logger.info("  ✓ Created index: atc.codigo")
 
     # Index for pharmaceutical form filtering
     drugs_collection.create_index([('formas_farmaceuticas.nombre', ASCENDING)], name='idx_formas_farmaceuticas')
     logger.info("  ✓ Created index: formas_farmaceuticas.nombre")
 
-    # Index for active status filtering
-    drugs_collection.create_index([('estado', ASCENDING)], name='idx_estado')
-    logger.info("  ✓ Created index: estado")
+    # Index for marketed-status filtering (actual field: comercializado)
+    drugs_collection.create_index([('comercializado', ASCENDING)], name='idx_comercializado')
+    logger.info("  ✓ Created index: comercializado")
 
     # === DRUG_INTERACTIONS COLLECTION ===
     logger.info("")
@@ -100,43 +102,47 @@ def create_mongodb_indexes(client: MongoClient, db_name: str, drop_existing: boo
         logger.info("Dropping existing indexes...")
         interactions_collection.drop_indexes()
 
-    # Index for finding interactions by source drug
-    interactions_collection.create_index([('cod_nacion_origen', ASCENDING)], name='idx_cod_nacion_origen')
-    logger.info("  ✓ Created index: cod_nacion_origen")
+    # Index for finding interactions by source drug (actual nested path)
+    interactions_collection.create_index([('medicamento_origen.cod_nacion', ASCENDING)], name='idx_origen_cod_nacion')
+    logger.info("  ✓ Created index: medicamento_origen.cod_nacion")
 
-    # Index for finding interactions by target drug
-    interactions_collection.create_index([('cod_nacion_destino', ASCENDING)], name='idx_cod_nacion_destino')
-    logger.info("  ✓ Created index: cod_nacion_destino")
+    # Index for source/target ATC class (used by complex/cross-class filters)
+    interactions_collection.create_index([('medicamento_origen.atc', ASCENDING)], name='idx_origen_atc')
+    logger.info("  ✓ Created index: medicamento_origen.atc")
+    interactions_collection.create_index([('medicamento_destino.atc', ASCENDING)], name='idx_destino_atc')
+    logger.info("  ✓ Created index: medicamento_destino.atc")
 
-    # Compound index for bidirectional lookup
+    # Compound index for source drug + target ATC
     interactions_collection.create_index(
-        [('cod_nacion_origen', ASCENDING), ('cod_nacion_destino', ASCENDING)],
+        [('medicamento_origen.cod_nacion', ASCENDING), ('medicamento_destino.atc', ASCENDING)],
         name='idx_interaction_pair'
     )
-    logger.info("  ✓ Created compound index: cod_nacion_origen + cod_nacion_destino")
+    logger.info("  ✓ Created compound index: medicamento_origen.cod_nacion + medicamento_destino.atc")
 
-    # Index for NLP severity filtering
-    interactions_collection.create_index([('nlp.severidad', ASCENDING)], name='idx_nlp_severidad')
-    logger.info("  ✓ Created index: nlp.severidad")
+    # Index for NLP severity filtering (actual nested path)
+    interactions_collection.create_index([('interaccion.nlp.severidad', ASCENDING)], name='idx_nlp_severidad')
+    logger.info("  ✓ Created index: interaccion.nlp.severidad")
 
     # Index for NLP type filtering
-    interactions_collection.create_index([('nlp.tipo', ASCENDING)], name='idx_nlp_tipo')
-    logger.info("  ✓ Created index: nlp.tipo")
+    interactions_collection.create_index([('interaccion.nlp.tipo', ASCENDING)], name='idx_nlp_tipo')
+    logger.info("  ✓ Created index: interaccion.nlp.tipo")
 
     # Index for NLP mechanism filtering
-    interactions_collection.create_index([('nlp.mecanismo', ASCENDING)], name='idx_nlp_mecanismo')
-    logger.info("  ✓ Created index: nlp.mecanismo")
+    interactions_collection.create_index([('interaccion.nlp.mecanismo', ASCENDING)], name='idx_nlp_mecanismo')
+    logger.info("  ✓ Created index: interaccion.nlp.mecanismo")
 
     # Compound index for severity + source drug (common UI query)
     interactions_collection.create_index(
-        [('cod_nacion_origen', ASCENDING), ('nlp.severidad', ASCENDING)],
+        [('medicamento_origen.cod_nacion', ASCENDING), ('interaccion.nlp.severidad', ASCENDING)],
         name='idx_origen_severidad'
     )
-    logger.info("  ✓ Created compound index: cod_nacion_origen + nlp.severidad")
+    logger.info("  ✓ Created compound index: medicamento_origen.cod_nacion + interaccion.nlp.severidad")
 
-    # Text index for effect/recommendation search
-    interactions_collection.create_index([('efecto', TEXT), ('recomendacion', TEXT)], name='idx_efecto_recomendacion_text')
-    logger.info("  ✓ Created text index: efecto + recomendacion")
+    # Text index for effect/recommendation search (actual nested path)
+    interactions_collection.create_index(
+        [('interaccion.efecto', TEXT), ('interaccion.recomendacion', TEXT)],
+        name='idx_efecto_recomendacion_text')
+    logger.info("  ✓ Created text index: interaccion.efecto + interaccion.recomendacion")
 
     # === ACTIVE_INGREDIENTS COLLECTION ===
     logger.info("")

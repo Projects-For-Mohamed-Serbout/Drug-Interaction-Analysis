@@ -127,6 +127,11 @@ class SeverityClassifierSpacy:
 
         # MODERATE phrase patterns
         self.moderate_patterns = [
+            # "Asociación desaconsejada": most common CIMA moderate-severity phrase
+            # (one level below "contraindicada").
+            (re.compile(r'\bdesaconsejad[ao]s?\b', re.IGNORECASE), 1.0),
+            (re.compile(r'\basociaci[oó]n\s+desaconsejada\b', re.IGNORECASE), 1.1),
+            (re.compile(r'\breducci[oó]n\s+del?\s+efecto\b', re.IGNORECASE), 0.8),
             (re.compile(r'\bprecauci[oó]n\b', re.IGNORECASE), 1.0),
             (re.compile(r'\bmonitorizar\b', re.IGNORECASE), 1.0),
             (re.compile(r'\bvigilar\b', re.IGNORECASE), 0.9),
@@ -293,6 +298,7 @@ class SeverityClassifierSpacy:
 
         # MODERATE - tokens AND lemmas
         self.moderate_tokens = {
+            'desaconsejada', 'desaconsejado', 'desaconsejadas', 'desaconsejados',
             'precaución', 'precaucion',
             'monitorizar', 'monitorización', 'monitorizacion',
             'vigilar', 'vigilancia',
@@ -307,7 +313,7 @@ class SeverityClassifierSpacy:
             'miopatía', 'miopatia',
         }
         self.moderate_lemmas = {
-            'monitorizar', 'vigilar', 'controlar', 'ajustar', 'reducir',
+            'monitorizar', 'vigilar', 'controlar', 'ajustar', 'reducir', 'desaconsejar',
         }
 
         # MILD - tokens AND lemmas

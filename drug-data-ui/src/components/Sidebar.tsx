@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { GiPill, GiChemicalDrop, GiBrain, GiFactory } from "react-icons/gi";
 import { RiFlowChart } from "react-icons/ri";
-import { MdBarChart } from "react-icons/md";
+import { MdBarChart, MdInsights } from "react-icons/md";
 import { MENU_ITEMS, MenuKey } from "../Constants";
 
 const iconMap = {
   [MenuKey.Dashboard]: AiOutlineHome,
+  [MenuKey.Results]: MdInsights,
   [MenuKey.Medications]: GiPill,
   [MenuKey.Interactions]: RiFlowChart,
   [MenuKey.ActiveIngredients]: GiChemicalDrop,

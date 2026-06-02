@@ -9,3 +9,8 @@ export const getGraphStats = async () => {
   const response = await axiosInstance.get("/database-performance/graph-stats");
   return response.data;
 };
+
+export const getScalabilityResults = async () => {
+  const response = await axiosInstance.get("/database-performance/scalability");
+  return response.data;
+};

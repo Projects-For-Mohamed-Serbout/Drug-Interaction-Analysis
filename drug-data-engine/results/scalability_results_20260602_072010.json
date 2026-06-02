@@ -1,0 +1,271 @@
+{
+  "generated_at": "2026-06-02T07:20:10.991458",
+  "method": "cod_nacion-scoped subsets (25/50/75/100%); counts to isolate engine work",
+  "iterations": 20,
+  "warmup": 3,
+  "total_drugs": 29784,
+  "thresholds": {
+    "25": "665947",
+    "50": "704001",
+    "75": "729512",
+    "100": "999999"
+  },
+  "results": [
+    {
+      "query": "count_by_severity",
+      "database": "MongoDB",
+      "size_pct": 25,
+      "median_ms": 74.93,
+      "p95_ms": 122.33,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "Neo4j",
+      "size_pct": 25,
+      "median_ms": 49.27,
+      "p95_ms": 50.79,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "MongoDB",
+      "size_pct": 50,
+      "median_ms": 123.14,
+      "p95_ms": 133.23,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "Neo4j",
+      "size_pct": 50,
+      "median_ms": 61.3,
+      "p95_ms": 65.67,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "MongoDB",
+      "size_pct": 75,
+      "median_ms": 204.09,
+      "p95_ms": 257.12,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "Neo4j",
+      "size_pct": 75,
+      "median_ms": 70.78,
+      "p95_ms": 76.83,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "MongoDB",
+      "size_pct": 100,
+      "median_ms": 260.06,
+      "p95_ms": 307.8,
+      "result": 3
+    },
+    {
+      "query": "count_by_severity",
+      "database": "Neo4j",
+      "size_pct": 100,
+      "median_ms": 80.87,
+      "p95_ms": 89.79,
+      "result": 3
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "MongoDB",
+      "size_pct": 25,
+      "median_ms": 68.17,
+      "p95_ms": 100.25,
+      "result": 5700
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "Neo4j",
+      "size_pct": 25,
+      "median_ms": 48.67,
+      "p95_ms": 50.89,
+      "result": 5692
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "MongoDB",
+      "size_pct": 50,
+      "median_ms": 67.08,
+      "p95_ms": 78.49,
+      "result": 13190
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "Neo4j",
+      "size_pct": 50,
+      "median_ms": 60.25,
+      "p95_ms": 67.25,
+      "result": 13178
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "MongoDB",
+      "size_pct": 75,
+      "median_ms": 66.53,
+      "p95_ms": 75.17,
+      "result": 17148
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "Neo4j",
+      "size_pct": 75,
+      "median_ms": 69.01,
+      "p95_ms": 71.89,
+      "result": 17132
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "MongoDB",
+      "size_pct": 100,
+      "median_ms": 70.04,
+      "p95_ms": 84.91,
+      "result": 22379
+    },
+    {
+      "query": "count_contraindicated",
+      "database": "Neo4j",
+      "size_pct": 100,
+      "median_ms": 79.66,
+      "p95_ms": 123.86,
+      "result": 22363
+    },
+    {
+      "query": "count_cardiac",
+      "database": "MongoDB",
+      "size_pct": 25,
+      "median_ms": 61.11,
+      "p95_ms": 65.08,
+      "result": 5256
+    },
+    {
+      "query": "count_cardiac",
+      "database": "Neo4j",
+      "size_pct": 25,
+      "median_ms": 49.16,
+      "p95_ms": 52.26,
+      "result": 5256
+    },
+    {
+      "query": "count_cardiac",
+      "database": "MongoDB",
+      "size_pct": 50,
+      "median_ms": 62.26,
+      "p95_ms": 83.64,
+      "result": 11959
+    },
+    {
+      "query": "count_cardiac",
+      "database": "Neo4j",
+      "size_pct": 50,
+      "median_ms": 60.1,
+      "p95_ms": 66.8,
+      "result": 11959
+    },
+    {
+      "query": "count_cardiac",
+      "database": "MongoDB",
+      "size_pct": 75,
+      "median_ms": 61.15,
+      "p95_ms": 62.45,
+      "result": 14723
+    },
+    {
+      "query": "count_cardiac",
+      "database": "Neo4j",
+      "size_pct": 75,
+      "median_ms": 68.67,
+      "p95_ms": 73.63,
+      "result": 14723
+    },
+    {
+      "query": "count_cardiac",
+      "database": "MongoDB",
+      "size_pct": 100,
+      "median_ms": 60.98,
+      "p95_ms": 65.21,
+      "result": 18245
+    },
+    {
+      "query": "count_cardiac",
+      "database": "Neo4j",
+      "size_pct": 100,
+      "median_ms": 77.1,
+      "p95_ms": 79.94,
+      "result": 18245
+    },
+    {
+      "query": "top_interacting",
+      "database": "MongoDB",
+      "size_pct": 25,
+      "median_ms": 61.67,
+      "p95_ms": 84.89,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "Neo4j",
+      "size_pct": 25,
+      "median_ms": 47.08,
+      "p95_ms": 61.73,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "MongoDB",
+      "size_pct": 50,
+      "median_ms": 94.12,
+      "p95_ms": 118.3,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "Neo4j",
+      "size_pct": 50,
+      "median_ms": 54.2,
+      "p95_ms": 57.24,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "MongoDB",
+      "size_pct": 75,
+      "median_ms": 118.92,
+      "p95_ms": 204.53,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "Neo4j",
+      "size_pct": 75,
+      "median_ms": 61.18,
+      "p95_ms": 77.94,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "MongoDB",
+      "size_pct": 100,
+      "median_ms": 204.8,
+      "p95_ms": 253.58,
+      "result": 10
+    },
+    {
+      "query": "top_interacting",
+      "database": "Neo4j",
+      "size_pct": 100,
+      "median_ms": 67.91,
+      "p95_ms": 70.59,
+      "result": 10
+    }
+  ]
+}

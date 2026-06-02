@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Database, Trophy, Zap, Clock, Server, Layers, AlertTriangle } from "lucide-react";
+import { Database, Trophy, Zap, Clock, Server, Layers, AlertTriangle, TrendingUp } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { getBenchmarkResults } from "../api/dbPerformance";
+import { getBenchmarkResults, getScalabilityResults } from "../api/dbPerformance";
 
 interface BenchmarkQuery {
   query: string;
@@ -39,6 +39,22 @@ interface BenchmarkSummary {
   row_count_mismatches: number;
 }
 
+interface ScalabilityQuery {
+  query: string;
+  label: string;
+  mongodb: (number | null)[];
+  neo4j: (number | null)[];
+  scaling: { mongodb: number | null; neo4j: number | null };
+}
+
+interface ScalabilityData {
+  sizes: number[];
+  queries: ScalabilityQuery[];
+  iterations: number | null;
+  method: string | null;
+  total_drugs: number | null;
+}
+
 const WINNER_STYLES: Record<string, string> = {
   MongoDB: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
   "Neo4J": "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
@@ -51,6 +67,7 @@ const WINNER_STYLES: Record<string, string> = {
 const DBPerformance = () => {
   const { t } = useTranslation();
   const [data, setData] = useState<BenchmarkSummary | null>(null);
+  const [scalability, setScalability] = useState<ScalabilityData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -62,6 +79,13 @@ const DBPerformance = () => {
         toast.error("Error loading benchmark results");
       } finally {
         setLoading(false);
+      }
+      // Scalability is optional — show the section only if results exist
+      try {
+        const scale = await getScalabilityResults();
+        setScalability(scale);
+      } catch {
+        setScalability(null);
       }
     };
     fetchData();
@@ -321,6 +345,39 @@ const DBPerformance = () => {
         </div>
       )}
 
+      {/* Scalability */}
+      {scalability && scalability.queries.length > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 shadow-sm overflow-hidden">
+          <div className="px-5 py-3 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-750 flex items-center gap-2">
+            <TrendingUp size={16} className="text-rose-500" />
+            <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm">
+              Scalability — query latency vs data volume (25% → 100%)
+            </h3>
+          </div>
+          <div className="p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+              Each query runs over a growing, indexed subset of the data (scoped by national code).
+              Lower lines are faster; flatter lines scale better.
+              {scalability.iterations ? ` ${scalability.iterations} iterations per point.` : ""}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {scalability.queries.map((q) => (
+                <ScalabilityChart key={q.query} q={q} sizes={scalability.sizes} />
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-4 mt-4 text-xs text-gray-500 dark:text-gray-400">
+              <span className="flex items-center gap-1.5">
+                <span className="inline-block w-3 h-0.5 bg-green-500" /> MongoDB
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="inline-block w-3 h-0.5 bg-blue-500" /> Neo4j
+              </span>
+              <span className="md:ml-auto">×N = latency growth from 25% → 100% data (lower = scales better)</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Conclusion */}
       <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-lg p-5 border border-blue-200 dark:border-blue-800">
         <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Key Findings</h3>
@@ -346,6 +403,46 @@ const DBPerformance = () => {
     </div>
   );
 };
+
+function ScalabilityChart({ q, sizes }: { q: ScalabilityQuery; sizes: number[] }) {
+  const W = 300, H = 180, padL = 42, padR = 14, padT = 16, padB = 30;
+  const vals = [...q.mongodb, ...q.neo4j].filter((v): v is number => v != null);
+  const maxY = Math.max(...vals, 1) * 1.15;
+  const n = sizes.length;
+  const xpos = (i: number) => padL + (n <= 1 ? 0 : (i / (n - 1)) * (W - padL - padR));
+  const ypos = (v: number) => padT + (1 - v / maxY) * (H - padT - padB);
+  const points = (arr: (number | null)[]) =>
+    arr.map((v, i) => (v == null ? null : `${xpos(i)},${ypos(v)}`)).filter(Boolean).join(" ");
+
+  return (
+    <div className="rounded-lg bg-gray-50 dark:bg-gray-750 p-3 border dark:border-gray-700">
+      <p className="text-xs font-medium text-gray-700 dark:text-gray-300 truncate mb-1" title={q.label}>
+        {q.label}
+      </p>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto">
+        <line x1={padL} y1={padT} x2={padL} y2={H - padB} className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="1" />
+        <line x1={padL} y1={H - padB} x2={W - padR} y2={H - padB} className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="1" />
+        <text x={padL - 6} y={padT + 4} textAnchor="end" fontSize={9} className="fill-gray-400">
+          {Math.round(maxY / 1.15)}ms
+        </text>
+        <text x={padL - 6} y={H - padB} textAnchor="end" fontSize={9} className="fill-gray-400">0</text>
+        {sizes.map((s, i) => (
+          <text key={s} x={xpos(i)} y={H - padB + 14} textAnchor="middle" fontSize={9} className="fill-gray-400">
+            {s}%
+          </text>
+        ))}
+        <polyline points={points(q.mongodb)} fill="none" stroke="#16a34a" strokeWidth="2" />
+        <polyline points={points(q.neo4j)} fill="none" stroke="#3b82f6" strokeWidth="2" />
+        {q.mongodb.map((v, i) => (v == null ? null : <circle key={`m${i}`} cx={xpos(i)} cy={ypos(v)} r="2.5" fill="#16a34a" />))}
+        {q.neo4j.map((v, i) => (v == null ? null : <circle key={`n${i}`} cx={xpos(i)} cy={ypos(v)} r="2.5" fill="#3b82f6" />))}
+      </svg>
+      <div className="flex justify-between text-[10px] mt-1">
+        <span className="text-green-600 font-medium">MongoDB {q.scaling.mongodb != null ? `${q.scaling.mongodb}×` : "—"}</span>
+        <span className="text-blue-600 font-medium">Neo4j {q.scaling.neo4j != null ? `${q.scaling.neo4j}×` : "—"}</span>
+      </div>
+    </div>
+  );
+}
 
 function formatQueryName(name: string): string {
   return name

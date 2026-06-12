@@ -61,6 +61,86 @@
     "title": "TFM Results",
     "description": "Headline results of the project: data engineering, NLP, and database benchmarks."
   },
+  "dataExplorer": {
+    "title": "Data Explorer",
+    "description": "Browse the underlying reference catalogues: medicines, active ingredients and laboratories."
+  },
+  "presentation": {
+    "navTitle": "Presentation",
+    "kicker": "Master's Thesis · Universidad de Málaga",
+    "title": "Drug Interaction Data Engineering & Analysis",
+    "subtitle": "An end-to-end pipeline that turns the official Spanish CIMA dataset into a structured, NLP-enriched and queryable resource — and uses it to compare two NoSQL databases for managing drug-interaction data.",
+    "takeawayLabel": "Takeaway —",
+    "metrics": {
+      "medicines": "Medicines",
+      "interactions": "Interactions",
+      "nlpEnriched": "NLP-enriched",
+      "databases": "NoSQL databases"
+    },
+    "etl": {
+      "kicker": "Part 1 · Data Engineering",
+      "title": "A complete, verified ETL pipeline",
+      "checksPassed": "integrity checks passed",
+      "drugs": "Drugs (XML = Mongo = Neo4j)",
+      "interactionsMongo": "Interactions (MongoDB)",
+      "edgesNeo4j": "Interaction edges (Neo4j)",
+      "refDicts": "Reference dictionaries",
+      "takeaway": "The source XML is reconciled against both databases with zero referential-integrity violations — the data is complete and consistent."
+    },
+    "nlp": {
+      "kicker": "Part 2 · Natural Language Processing (RQ1)",
+      "title": "From free text to structured clinical attributes",
+      "liveExample": "Live example",
+      "rawText": "Raw text (Spanish)",
+      "extracted": "Extracted by NLP",
+      "severity": "severity",
+      "type": "type",
+      "mechanism": "mechanism",
+      "f1Title": "Regex vs spaCy (accuracy)",
+      "best": "best",
+      "evaluatedOn": "Evaluated on all {{count}} distinct interaction texts (a census of the corpus). Severity is near-perfect for both; spaCy generalises better on type. Mechanism is rarely stated in the source text.",
+      "severityDistTitle": "Severity across all interactions",
+      "takeaway": "Two NLP approaches turn Spanish free text into queryable severity, type and mechanism — applied to 100% of the {{total}} interactions."
+    },
+    "graph": {
+      "title": "Interaction network of one drug (graph view)",
+      "subtitle": "{{count}} interactions for {{drug}}",
+      "loading": "Building interaction network…",
+      "empty": "No interaction network available.",
+      "more": "+{{count}} more",
+      "takeaway": "One drug can interact with dozens of others — exactly the connected structure a graph database is built to traverse."
+    },
+    "lookup": {
+      "kicker": "Usefulness · Try it yourself",
+      "title": "Live drug-interaction lookup",
+      "hint": "Search the official CIMA catalogue and see a medicine's real interactions, ranked by severity.",
+      "placeholder": "Type a medicine name… e.g. Sintrom",
+      "searching": "Loading interactions…",
+      "selected": "{{count}} interactions for {{drug}}",
+      "noInteractions": "No interactions recorded for this medicine.",
+      "takeaway": "A clinician could type any medicine and instantly see its documented interactions ranked by severity — the project's data made directly useful."
+    },
+    "db": {
+      "kicker": "Part 3 · MongoDB vs Neo4j (RQ2 / RQ3)",
+      "title": "A fair, measured database comparison",
+      "overall": "Overall",
+      "faster": "{{factor}}× faster",
+      "mongoWins": "MongoDB wins",
+      "neo4jWins": "Neo4j wins",
+      "graphOnly": "Graph-only queries",
+      "neo4jOnly": "Neo4j only",
+      "medianMs": "{{ms}} ms median",
+      "scalabilityTitle": "Scalability — latency growth from 25% → 100% data (lower scales better)",
+      "takeaway": "No single winner: Neo4j dominates aggregation, traversal and multi-hop queries (and scales better), while MongoDB wins simple indexed lookups — the optimal store depends on the workload."
+    },
+    "closing": {
+      "title": "In one sentence",
+      "text": "A reproducible system that engineers, enriches and compares the official Spanish drug-interaction data — answering all three research questions with measured results and a working, explorable application.",
+      "exploreNlp": "Explore NLP analysis",
+      "exploreDb": "Explore database performance",
+      "browseInteractions": "Browse interactions"
+    }
+  },
   "search": {
     "medicationsSearch": "Medication Search",
     "searchPlaceholder": "Search by name, active ingredient or national code...",

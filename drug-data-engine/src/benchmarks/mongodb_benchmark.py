@@ -57,11 +57,16 @@ class MongoDBBenchmark(BaseBenchmark):
         try:
             server_info = self.client.server_info()
             db_stats = self.db.command('dbStats')
+            # Active storage engine (serverStatus.storageEngine.name), not the
+            # list of *available* engines in buildInfo.storageEngines.
+            try:
+                storage_engine = self.db.command('serverStatus').get(
+                    'storageEngine', {}).get('name', 'wiredTiger')
+            except Exception:
+                storage_engine = 'wiredTiger'  # Atlas default; serverStatus may be restricted
             return {
                 'version': server_info.get('version', 'unknown'),
-                'storage_engine': server_info.get('storageEngines', ['unknown'])[0]
-                if isinstance(server_info.get('storageEngines'), list)
-                else 'unknown',
+                'storage_engine': storage_engine,
                 'database': self.database_name_db,
                 'collections': len(self.db.list_collection_names()),
                 'data_size_mb': round(db_stats.get('dataSize', 0) / (1024 * 1024), 2),

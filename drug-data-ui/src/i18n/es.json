@@ -61,6 +61,86 @@
     "title": "Resultados TFM",
     "description": "Resultados principales del proyecto: ingeniería de datos, NLP y benchmarks de bases de datos."
   },
+  "dataExplorer": {
+    "title": "Explorador de Datos",
+    "description": "Explora los catálogos de referencia subyacentes: medicamentos, principios activos y laboratorios."
+  },
+  "presentation": {
+    "navTitle": "Presentación",
+    "kicker": "Trabajo Fin de Máster · Universidad de Málaga",
+    "title": "Ingeniería y Análisis de Datos de Interacciones Farmacológicas",
+    "subtitle": "Un pipeline de extremo a extremo que convierte el conjunto de datos oficial español CIMA en un recurso estructurado, enriquecido con NLP y consultable — y lo utiliza para comparar dos bases de datos NoSQL en la gestión de datos de interacciones farmacológicas.",
+    "takeawayLabel": "Conclusión —",
+    "metrics": {
+      "medicines": "Medicamentos",
+      "interactions": "Interacciones",
+      "nlpEnriched": "Enriquecido con NLP",
+      "databases": "Bases de datos NoSQL"
+    },
+    "etl": {
+      "kicker": "Parte 1 · Ingeniería de Datos",
+      "title": "Un pipeline ETL completo y verificado",
+      "checksPassed": "comprobaciones de integridad superadas",
+      "drugs": "Medicamentos (XML = Mongo = Neo4j)",
+      "interactionsMongo": "Interacciones (MongoDB)",
+      "edgesNeo4j": "Aristas de interacción (Neo4j)",
+      "refDicts": "Diccionarios de referencia",
+      "takeaway": "El XML de origen se reconcilia con ambas bases de datos sin ninguna violación de integridad referencial — los datos son completos y consistentes."
+    },
+    "nlp": {
+      "kicker": "Parte 2 · Procesamiento de Lenguaje Natural (RQ1)",
+      "title": "De texto libre a atributos clínicos estructurados",
+      "liveExample": "Ejemplo en vivo",
+      "rawText": "Texto original (español)",
+      "extracted": "Extraído por NLP",
+      "severity": "gravedad",
+      "type": "tipo",
+      "mechanism": "mecanismo",
+      "f1Title": "Regex vs spaCy (precisión)",
+      "best": "mejor",
+      "evaluatedOn": "Evaluado sobre los {{count}} textos de interacción distintos (un censo del corpus). La gravedad es casi perfecta en ambos; spaCy generaliza mejor en el tipo. El mecanismo rara vez se indica en el texto original.",
+      "severityDistTitle": "Gravedad en todas las interacciones",
+      "takeaway": "Dos enfoques de NLP convierten el texto libre en español en gravedad, tipo y mecanismo consultables — aplicado al 100% de las {{total}} interacciones."
+    },
+    "graph": {
+      "title": "Red de interacciones de un medicamento (vista de grafo)",
+      "subtitle": "{{count}} interacciones de {{drug}}",
+      "loading": "Construyendo la red de interacciones…",
+      "empty": "No hay red de interacciones disponible.",
+      "more": "+{{count}} más",
+      "takeaway": "Un solo medicamento puede interactuar con decenas de otros — exactamente la estructura conectada que una base de datos de grafos está diseñada para recorrer."
+    },
+    "lookup": {
+      "kicker": "Utilidad · Pruébalo tú mismo",
+      "title": "Búsqueda de interacciones en vivo",
+      "hint": "Busca en el catálogo oficial CIMA y consulta las interacciones reales de un medicamento, ordenadas por gravedad.",
+      "placeholder": "Escribe el nombre de un medicamento… p. ej. Sintrom",
+      "searching": "Cargando interacciones…",
+      "selected": "{{count}} interacciones de {{drug}}",
+      "noInteractions": "No hay interacciones registradas para este medicamento.",
+      "takeaway": "Un clínico podría escribir cualquier medicamento y ver al instante sus interacciones documentadas ordenadas por gravedad — los datos del proyecto hechos directamente útiles."
+    },
+    "db": {
+      "kicker": "Parte 3 · MongoDB vs Neo4j (RQ2 / RQ3)",
+      "title": "Una comparación de bases de datos justa y medida",
+      "overall": "Global",
+      "faster": "{{factor}}× más rápido",
+      "mongoWins": "Victorias MongoDB",
+      "neo4jWins": "Victorias Neo4j",
+      "graphOnly": "Consultas solo de grafo",
+      "neo4jOnly": "Solo Neo4j",
+      "medianMs": "{{ms}} ms mediana",
+      "scalabilityTitle": "Escalabilidad — crecimiento de latencia del 25% → 100% de los datos (menor escala mejor)",
+      "takeaway": "No hay un único ganador: Neo4j domina en agregación, recorrido y consultas multi-salto (y escala mejor), mientras que MongoDB gana en búsquedas indexadas simples — el almacén óptimo depende de la carga de trabajo."
+    },
+    "closing": {
+      "title": "En una frase",
+      "text": "Un sistema reproducible que diseña, enriquece y compara los datos oficiales españoles de interacciones farmacológicas — respondiendo a las tres preguntas de investigación con resultados medidos y una aplicación funcional y explorable.",
+      "exploreNlp": "Explorar análisis NLP",
+      "exploreDb": "Explorar rendimiento de bases de datos",
+      "browseInteractions": "Explorar interacciones"
+    }
+  },
   "search": {
     "medicationsSearch": "Búsqueda de Medicamentos",
     "searchPlaceholder": "Buscar por nombre, principio activo o código nacional...",

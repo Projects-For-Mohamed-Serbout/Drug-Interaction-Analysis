@@ -14,6 +14,7 @@ Usage:
     python -m scripts.evaluate_nlp --output results/    # save report
 """
 import argparse
+import csv
 import json
 import logging
 import hashlib
@@ -375,6 +376,45 @@ GROUND_TRUTH = [
 
 
 # =========================================================================
+# External gold set (annotated CSV from scripts.sample_gold_set)
+# =========================================================================
+
+def load_gold_csv(path: str, logger) -> List[Dict]:
+    """
+    Load an annotated gold set produced by scripts.sample_gold_set.
+
+    Only rows with all three labels filled are kept. Returns the same shape as
+    the built-in GROUND_TRUTH so the rest of the pipeline is unchanged.
+    """
+    rows: List[Dict] = []
+    skipped = 0
+    # utf-8-sig tolerates the BOM written for Excel compatibility
+    with open(path, "r", encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            sev = (row.get("true_severity") or "").strip().lower()
+            typ = (row.get("true_type") or "").strip().lower()
+            mech = (row.get("true_mechanism") or "").strip().lower()
+            if not (sev and typ and mech):
+                skipped += 1
+                continue
+            rows.append({
+                "efecto": (row.get("efecto") or "").strip(),
+                "recomendacion": (row.get("recomendacion") or "").strip(),
+                "true_severity": sev,
+                "true_type": typ,
+                "true_mechanism": mech,
+            })
+    logger.info("Loaded %d annotated rows from %s (skipped %d unlabelled).",
+                len(rows), path, skipped)
+    if not rows:
+        raise ValueError(
+            f"No fully-annotated rows in {path}. Fill true_severity / "
+            f"true_type / true_mechanism before evaluating."
+        )
+    return rows
+
+
+# =========================================================================
 # Evaluation metrics
 # =========================================================================
 
@@ -486,6 +526,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Evaluate NLP approaches')
     parser.add_argument('--output', type=str, default=None,
                         help='Directory to save results (JSON)')
+    parser.add_argument('--gold-csv', type=str, default=None,
+                        help='Annotated gold-set CSV (from scripts.sample_gold_set). '
+                             'If omitted, uses the built-in 44-sample set.')
     parser.add_argument('--spacy-model', default='es_core_news_md')
     parser.add_argument('--log-level', default='INFO')
     return parser.parse_args()
@@ -495,15 +538,24 @@ def main():
     args = parse_args()
     logger = setup_logging(args.log_level)
 
+    # --- Select gold set: external annotated CSV or the built-in sample ---
+    if args.gold_csv:
+        gold = load_gold_csv(args.gold_csv, logger)
+        gold_source = args.gold_csv
+    else:
+        gold = GROUND_TRUTH
+        gold_source = "built-in (44 curated samples)"
+
     logger.info("=" * 70)
     logger.info("NLP EVALUATION: Regex vs spaCy against Ground Truth")
-    logger.info(f"Ground truth samples: {len(GROUND_TRUTH)}")
+    logger.info(f"Gold set: {gold_source}")
+    logger.info(f"Ground truth samples: {len(gold)}")
     logger.info("=" * 70)
 
     # --- Distribution of ground truth ---
-    sev_dist = Counter(s['true_severity'] for s in GROUND_TRUTH)
-    type_dist = Counter(s['true_type'] for s in GROUND_TRUTH)
-    mech_dist = Counter(s['true_mechanism'] for s in GROUND_TRUTH)
+    sev_dist = Counter(s['true_severity'] for s in gold)
+    type_dist = Counter(s['true_type'] for s in gold)
+    mech_dist = Counter(s['true_mechanism'] for s in gold)
 
     logger.info("\nGround truth distribution:")
     logger.info(f"  Severity: {dict(sev_dist)}")
@@ -523,7 +575,7 @@ def main():
 
     details = []
 
-    for sample in GROUND_TRUTH:
+    for sample in gold:
         effect = sample['efecto']
         recom = sample['recomendacion']
 
@@ -652,10 +704,23 @@ def main():
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         output_file = output_dir / f"nlp_evaluation_{timestamp}.json"
 
+        # Attach confusion matrices (classes + matrix) to each metrics block
+        for metrics, yt, yp in [
+            (regex_sev_metrics, true_severities, regex_severities),
+            (spacy_sev_metrics, true_severities, spacy_severities),
+            (regex_type_metrics, true_types, regex_types),
+            (spacy_type_metrics, true_types, spacy_types),
+            (regex_mech_metrics, true_mechanisms, regex_mechanisms),
+            (spacy_mech_metrics, true_mechanisms, spacy_mechanisms),
+        ]:
+            classes, matrix = build_confusion_matrix(yt, yp)
+            metrics['confusion'] = {'classes': classes, 'matrix': matrix}
+
         report = {
             'metadata': {
                 'timestamp': datetime.now().isoformat(),
-                'ground_truth_samples': len(GROUND_TRUTH),
+                'ground_truth_samples': len(gold),
+                'gold_source': gold_source,
                 'spacy_model': args.spacy_model,
             },
             'results': {

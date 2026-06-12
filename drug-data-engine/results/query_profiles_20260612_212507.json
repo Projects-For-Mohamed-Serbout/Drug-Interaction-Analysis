@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-12T21:25:07.497954",
+    "note": "server_ms = DB-reported execution time (network-independent); wall_ms = client round-trip incl. network",
+    "mongodb_db": "drug_interaction_analysis_2"
+  },
+  "queries": [
+    {
+      "id": "Q1",
+      "category": "Point Lookup",
+      "name": "Drug by national code",
+      "mongo": {
+        "server_ms": 1,
+        "docs_examined": 1,
+        "keys_examined": 1,
+        "returned": 1,
+        "indexes": [
+          "idx_cod_nacion"
+        ],
+        "used_index": true,
+        "scan": [
+          "EXPRESS_IXSCAN"
+        ],
+        "wall_ms": 41.44
+      },
+      "neo4j": {
+        "server_ms": 39,
+        "available_after_ms": 18,
+        "consumed_after_ms": 21,
+        "db_hits": 28,
+        "rows": 1,
+        "operators": [
+          "ProduceResults@138603cf",
+          "NodeUniqueIndexSeek@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 39.31
+      }
+    },
+    {
+      "id": "Q2",
+      "category": "Relationship Traversal",
+      "name": "Interactions for a drug",
+      "mongo": {
+        "server_ms": 3,
+        "docs_examined": 26,
+        "keys_examined": 26,
+        "returned": 26,
+        "indexes": [
+          "idx_interaction_pair",
+          "idx_origen_cod_nacion",
+          "idx_origen_severidad"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 39.99
+      },
+      "neo4j": {
+        "server_ms": 28,
+        "available_after_ms": 27,
+        "consumed_after_ms": 1,
+        "db_hits": 158,
+        "rows": 26,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Projection@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "NodeUniqueIndexSeek@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 41.44
+      }
+    },
+    {
+      "id": "Q3",
+      "category": "Range Scan",
+      "name": "Contraindicated interactions",
+      "mongo": {
+        "server_ms": 2,
+        "docs_examined": 1000,
+        "keys_examined": 1000,
+        "returned": 1000,
+        "indexes": [
+          "idx_nlp_severidad"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 103.13
+      },
+      "neo4j": {
+        "server_ms": 66,
+        "available_after_ms": 38,
+        "consumed_after_ms": 28,
+        "db_hits": 21576,
+        "rows": 1000,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Projection@138603cf",
+          "Limit@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "CacheProperties@138603cf",
+          "NodeByLabelScan@138603cf"
+        ],
+        "used_index": false,
+        "wall_ms": 135.3
+      }
+    },
+    {
+      "id": "Q6",
+      "category": "Aggregation",
+      "name": "Count interactions by severity",
+      "mongo": {
+        "server_ms": 169,
+        "docs_examined": 70682,
+        "keys_examined": 70682,
+        "returned": 70682,
+        "indexes": [
+          "idx_nlp_severidad"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 169.24
+      },
+      "neo4j": {
+        "server_ms": 72,
+        "available_after_ms": 23,
+        "consumed_after_ms": 49,
+        "db_hits": 69697,
+        "rows": 3,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Sort@138603cf",
+          "OrderedAggregation@138603cf",
+          "DirectedRelationshipIndexScan@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 59.86
+      }
+    },
+    {
+      "id": "Q7",
+      "category": "Range Scan",
+      "name": "Drugs by ATC prefix",
+      "mongo": {
+        "server_ms": 18,
+        "docs_examined": 500,
+        "keys_examined": 500,
+        "returned": 500,
+        "indexes": [
+          "idx_atc_codigo"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 92.56
+      },
+      "neo4j": {
+        "server_ms": 34,
+        "available_after_ms": 30,
+        "consumed_after_ms": 4,
+        "db_hits": 2537,
+        "rows": 500,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Limit@138603cf",
+          "OrderedDistinct@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "NodeUniqueIndexSeekByRange@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 67.79
+      }
+    },
+    {
+      "id": "Q8",
+      "category": "Complex Filter",
+      "name": "Severe cardiac interactions in ATC class",
+      "mongo": {
+        "server_ms": 4,
+        "docs_examined": 1041,
+        "keys_examined": 1041,
+        "returned": 1041,
+        "indexes": [
+          "idx_nlp_severidad",
+          "idx_nlp_tipo",
+          "idx_origen_atc"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 165.38
+      },
+      "neo4j": {
+        "server_ms": 47,
+        "available_after_ms": 43,
+        "consumed_after_ms": 4,
+        "db_hits": 5821,
+        "rows": 500,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Projection@138603cf",
+          "Limit@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "NodeUniqueIndexSeekByRange@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 76.97
+      }
+    },
+    {
+      "id": "Q9",
+      "category": "Aggregation",
+      "name": "Top interacting drugs",
+      "mongo": {
+        "server_ms": 86,
+        "docs_examined": 70682,
+        "keys_examined": 0,
+        "returned": 70682,
+        "indexes": [],
+        "used_index": false,
+        "scan": "COLLSCAN",
+        "wall_ms": 124.2
+      },
+      "neo4j": {
+        "server_ms": 131,
+        "available_after_ms": 21,
+        "consumed_after_ms": 110,
+        "db_hits": 129326,
+        "rows": 10,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Top@138603cf",
+          "EagerAggregation@138603cf",
+          "Expand(All)@138603cf",
+          "CacheProperties@138603cf",
+          "NodeByLabelScan@138603cf"
+        ],
+        "used_index": false,
+        "wall_ms": 82.41
+      }
+    }
+  ]
+}

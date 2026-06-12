@@ -227,6 +227,51 @@ class MongoDBService:
     # =========================================================================
     # NLP Analysis
     # =========================================================================
+    def get_severity_type_matrix(self) -> Dict:
+        """
+        Cross-tabulate interaction TYPE x SEVERITY across the processed corpus.
+        Powers the "which interaction types carry the most danger" heatmap.
+        """
+        severity_order = ['contraindicated', 'severe', 'moderate', 'mild', 'unknown']
+
+        rows = list(self.db['drug_interactions'].aggregate([
+            {'$match': {
+                'interaccion.nlp.tipo': {'$ne': None},
+                'interaccion.nlp.severidad': {'$ne': None},
+            }},
+            {'$group': {
+                '_id': {
+                    'tipo': '$interaccion.nlp.tipo',
+                    'severidad': '$interaccion.nlp.severidad',
+                },
+                'count': {'$sum': 1},
+            }},
+        ]))
+
+        # pivot into {type: {severity: count}}
+        by_type: Dict[str, Dict[str, int]] = {}
+        for r in rows:
+            tipo = r['_id'].get('tipo') or 'unknown'
+            sev = r['_id'].get('severidad') or 'unknown'
+            by_type.setdefault(tipo, {})
+            by_type[tipo][sev] = by_type[tipo].get(sev, 0) + r['count']
+
+        types = []
+        for tipo, counts in by_type.items():
+            total = sum(counts.values())
+            types.append({
+                'type': tipo,
+                'total': total,
+                'counts': {s: counts.get(s, 0) for s in severity_order},
+            })
+        types.sort(key=lambda x: -x['total'])
+
+        return {
+            'severities': severity_order,
+            'types': types,
+            'total': sum(t['total'] for t in types),
+        }
+
     def get_nlp_statistics(self) -> Dict:
         """Get NLP processing statistics and distributions."""
         total = self.db['drug_interactions'].count_documents({})

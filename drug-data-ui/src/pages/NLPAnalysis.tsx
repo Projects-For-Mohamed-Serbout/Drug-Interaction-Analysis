@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Brain, CheckCircle, Clock, BarChart3, Target, Layers, Cog } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { getNlpStatistics } from "../api/nlpAnalysis";
+import NlpEvaluation from "../components/NlpEvaluation";
+import SeverityTypeHeatmap from "../components/SeverityTypeHeatmap";
 
 interface DistributionItem {
   label: string;
@@ -171,6 +173,12 @@ const AnalisisNLP = () => {
           <span>{stats.total_interactions.toLocaleString()}</span>
         </div>
       </div>
+
+      {/* Model evaluation (RQ1): regex vs spaCy on the independent census */}
+      <NlpEvaluation />
+
+      {/* Where the danger concentrates: type x severity heatmap */}
+      <SeverityTypeHeatmap />
 
       {/* Distribution Grids */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -198,3 +198,8 @@ data
 know_path_tree-project.py
 drug-data-engine/scripts/analyze_d2d_feasibility.py
 documents
+
+# Local-only: thesis/design material and tooling session data (kept on disk, not uploaded)
+.claude/
+design/
+PROJECT_OVERVIEW.md

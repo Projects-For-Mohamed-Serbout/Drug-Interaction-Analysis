@@ -1,0 +1,318 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-12T21:34:45.460335",
+    "note": "server_ms = median DB-reported execution time over 5 runs (network-independent); wall_ms = client round-trip median incl. network",
+    "server_runs": 5,
+    "mongodb_db": "drug_interaction_analysis_2"
+  },
+  "queries": [
+    {
+      "id": "Q1",
+      "category": "Point Lookup",
+      "name": "Drug by national code",
+      "mongo": {
+        "server_ms": 0,
+        "server_ms_spread": {
+          "median": 0,
+          "min": 0,
+          "max": 0,
+          "runs": 5
+        },
+        "docs_examined": 1,
+        "keys_examined": 1,
+        "returned": 1,
+        "indexes": [
+          "idx_cod_nacion"
+        ],
+        "used_index": true,
+        "scan": [
+          "EXPRESS_IXSCAN"
+        ],
+        "wall_ms": 41.2
+      },
+      "neo4j": {
+        "server_ms": 2,
+        "server_ms_spread": {
+          "median": 2,
+          "min": 1,
+          "max": 12,
+          "runs": 5
+        },
+        "db_hits": 28,
+        "rows": 1,
+        "operators": [
+          "ProduceResults@138603cf",
+          "NodeUniqueIndexSeek@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 38.88
+      }
+    },
+    {
+      "id": "Q2",
+      "category": "Relationship Traversal",
+      "name": "Interactions for a drug",
+      "mongo": {
+        "server_ms": 0,
+        "server_ms_spread": {
+          "median": 0,
+          "min": 0,
+          "max": 1,
+          "runs": 5
+        },
+        "docs_examined": 26,
+        "keys_examined": 26,
+        "returned": 26,
+        "indexes": [
+          "idx_interaction_pair",
+          "idx_origen_cod_nacion",
+          "idx_origen_severidad"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 40.74
+      },
+      "neo4j": {
+        "server_ms": 1,
+        "server_ms_spread": {
+          "median": 1,
+          "min": 1,
+          "max": 13,
+          "runs": 5
+        },
+        "db_hits": 158,
+        "rows": 26,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Projection@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "NodeUniqueIndexSeek@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 43.26
+      }
+    },
+    {
+      "id": "Q3",
+      "category": "Range Scan",
+      "name": "Contraindicated interactions",
+      "mongo": {
+        "server_ms": 2,
+        "server_ms_spread": {
+          "median": 2,
+          "min": 2,
+          "max": 3,
+          "runs": 5
+        },
+        "docs_examined": 1000,
+        "keys_examined": 1000,
+        "returned": 1000,
+        "indexes": [
+          "idx_nlp_severidad"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 97.66
+      },
+      "neo4j": {
+        "server_ms": 14,
+        "server_ms_spread": {
+          "median": 14,
+          "min": 12,
+          "max": 26,
+          "runs": 5
+        },
+        "db_hits": 21576,
+        "rows": 1000,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Projection@138603cf",
+          "Limit@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "CacheProperties@138603cf",
+          "NodeByLabelScan@138603cf"
+        ],
+        "used_index": false,
+        "wall_ms": 135.44
+      }
+    },
+    {
+      "id": "Q6",
+      "category": "Aggregation",
+      "name": "Count interactions by severity",
+      "mongo": {
+        "server_ms": 138,
+        "server_ms_spread": {
+          "median": 138,
+          "min": 136,
+          "max": 144,
+          "runs": 5
+        },
+        "docs_examined": 70682,
+        "keys_examined": 70682,
+        "returned": 70682,
+        "indexes": [
+          "idx_nlp_severidad"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 169.06
+      },
+      "neo4j": {
+        "server_ms": 17,
+        "server_ms_spread": {
+          "median": 17,
+          "min": 15,
+          "max": 31,
+          "runs": 5
+        },
+        "db_hits": 69697,
+        "rows": 3,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Sort@138603cf",
+          "OrderedAggregation@138603cf",
+          "DirectedRelationshipIndexScan@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 57.82
+      }
+    },
+    {
+      "id": "Q7",
+      "category": "Range Scan",
+      "name": "Drugs by ATC prefix",
+      "mongo": {
+        "server_ms": 2,
+        "server_ms_spread": {
+          "median": 2,
+          "min": 2,
+          "max": 6,
+          "runs": 5
+        },
+        "docs_examined": 500,
+        "keys_examined": 500,
+        "returned": 500,
+        "indexes": [
+          "idx_atc_codigo"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 91.86
+      },
+      "neo4j": {
+        "server_ms": 3,
+        "server_ms_spread": {
+          "median": 3,
+          "min": 3,
+          "max": 24,
+          "runs": 5
+        },
+        "db_hits": 2537,
+        "rows": 500,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Limit@138603cf",
+          "OrderedDistinct@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "NodeUniqueIndexSeekByRange@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 67.9
+      }
+    },
+    {
+      "id": "Q8",
+      "category": "Complex Filter",
+      "name": "Severe cardiac interactions in ATC class",
+      "mongo": {
+        "server_ms": 3,
+        "server_ms_spread": {
+          "median": 3,
+          "min": 3,
+          "max": 3,
+          "runs": 5
+        },
+        "docs_examined": 1041,
+        "keys_examined": 1041,
+        "returned": 1041,
+        "indexes": [
+          "idx_nlp_severidad",
+          "idx_nlp_tipo",
+          "idx_origen_atc"
+        ],
+        "used_index": true,
+        "scan": "IXSCAN",
+        "wall_ms": 158.08
+      },
+      "neo4j": {
+        "server_ms": 4,
+        "server_ms_spread": {
+          "median": 4,
+          "min": 3,
+          "max": 41,
+          "runs": 5
+        },
+        "db_hits": 5821,
+        "rows": 500,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Projection@138603cf",
+          "Limit@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "Filter@138603cf",
+          "Expand(All)@138603cf",
+          "NodeUniqueIndexSeekByRange@138603cf"
+        ],
+        "used_index": true,
+        "wall_ms": 66.36
+      }
+    },
+    {
+      "id": "Q9",
+      "category": "Aggregation",
+      "name": "Top interacting drugs",
+      "mongo": {
+        "server_ms": 93,
+        "server_ms_spread": {
+          "median": 93,
+          "min": 89,
+          "max": 118,
+          "runs": 5
+        },
+        "docs_examined": 70682,
+        "keys_examined": 0,
+        "returned": 70682,
+        "indexes": [],
+        "used_index": false,
+        "scan": "COLLSCAN",
+        "wall_ms": 128.32
+      },
+      "neo4j": {
+        "server_ms": 54,
+        "server_ms_spread": {
+          "median": 54,
+          "min": 38,
+          "max": 126,
+          "runs": 5
+        },
+        "db_hits": 129326,
+        "rows": 10,
+        "operators": [
+          "ProduceResults@138603cf",
+          "Top@138603cf",
+          "EagerAggregation@138603cf",
+          "Expand(All)@138603cf",
+          "CacheProperties@138603cf",
+          "NodeByLabelScan@138603cf"
+        ],
+        "used_index": false,
+        "wall_ms": 77.77
+      }
+    }
+  ]
+}

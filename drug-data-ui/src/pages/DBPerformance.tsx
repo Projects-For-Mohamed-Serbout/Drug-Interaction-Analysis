@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Database, Trophy, Zap, Clock, Server, Layers, AlertTriangle, TrendingUp } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { getBenchmarkResults, getScalabilityResults } from "../api/dbPerformance";
+import QueryProfiles from "../components/QueryProfiles";
+import DataModelComparison from "../components/DataModelComparison";
 
 interface BenchmarkQuery {
   query: string;
@@ -187,6 +189,12 @@ const DBPerformance = () => {
           </p>
         </div>
       </div>
+
+      {/* RQ2 data structure: document vs graph (structure explains the speed) */}
+      <DataModelComparison />
+
+      {/* Server-side vs wall-clock profiling (engine time, network-isolated) */}
+      <QueryProfiles />
 
       {/* Category Breakdown */}
       {data.category_breakdown && data.category_breakdown.length > 0 && (

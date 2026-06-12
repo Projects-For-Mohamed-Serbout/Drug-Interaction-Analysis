@@ -14,3 +14,8 @@ export const getScalabilityResults = async () => {
   const response = await axiosInstance.get("/database-performance/scalability");
   return response.data;
 };
+
+export const getQueryProfiles = async () => {
+  const response = await axiosInstance.get("/database-performance/query-profiles");
+  return response.data;
+};

@@ -195,6 +195,56 @@ async def get_scalability_results():
     }
 
 
+@router.get("/query-profiles")
+async def get_query_profiles():
+    """
+    Server-side execution time + query plans (from scripts/profile_queries.py),
+    contrasted with wall-clock. Isolates engine work from cloud-network latency.
+    """
+    results_dir = Path(__file__).parent.parent.parent.parent / 'results'
+    files = sorted(results_dir.glob('query_profiles_*.json'), reverse=True)
+    if not files:
+        raise HTTPException(
+            status_code=404,
+            detail="No query profiles found. Run scripts/profile_queries.py --output results/ first."
+        )
+
+    with open(files[0], encoding='utf-8') as f:
+        data = json.load(f)
+
+    rows = []
+    for q in data.get('queries', []):
+        m = q.get('mongo', {}) or {}
+        n = q.get('neo4j', {}) or {}
+        rows.append({
+            'id': q.get('id'),
+            'category': q.get('category'),
+            'name': q.get('name'),
+            'mongodb': {
+                'server_ms': m.get('server_ms'),
+                'wall_ms': m.get('wall_ms'),
+                'spread': m.get('server_ms_spread'),
+                'used_index': m.get('used_index'),
+                'scan': m.get('scan'),
+                'docs_examined': m.get('docs_examined'),
+            },
+            'neo4j': {
+                'server_ms': n.get('server_ms'),
+                'wall_ms': n.get('wall_ms'),
+                'spread': n.get('server_ms_spread'),
+                'used_index': n.get('used_index'),
+                'db_hits': n.get('db_hits'),
+            },
+        })
+
+    return {
+        'generated_at': data.get('metadata', {}).get('timestamp'),
+        'server_runs': data.get('metadata', {}).get('server_runs'),
+        'note': data.get('metadata', {}).get('note'),
+        'queries': rows,
+    }
+
+
 @router.get("/graph-stats")
 async def get_graph_stats():
     """Get Neo4j graph statistics (node/relationship counts)."""
